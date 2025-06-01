@@ -9,6 +9,7 @@
 
 namespace VeterinariaHuellitas.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -22,6 +23,8 @@ namespace VeterinariaHuellitas.Models
     
         public int id_especie { get; set; }
         public string nombre_especie { get; set; }
+
+        [JsonIgnore]
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RAZA_MASCOTA> RAZA_MASCOTA { get; set; }
