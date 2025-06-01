@@ -1,0 +1,2971 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VeterinariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CAMA">
+          <Key>
+            <PropertyRef Name="id_cama" />
+          </Key>
+          <Property Name="id_cama" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="numero_identificador" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tipo_cama" Type="varchar" MaxLength="50" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CARGO_EMPLEADO">
+          <Key>
+            <PropertyRef Name="id_cargo_empleado" />
+          </Key>
+          <Property Name="id_cargo_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cargo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="salario_base" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="CIRUGIA">
+          <Key>
+            <PropertyRef Name="id_cirugia" />
+          </Key>
+          <Property Name="id_cirugia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_mascota" Type="int" Nullable="false" />
+          <Property Name="id_tipo_cirugia" Type="int" Nullable="false" />
+          <Property Name="id_empleado_cirujano" Type="int" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="fecha_hora_programada" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="informe_quirurgico" Type="text" />
+          <Property Name="id_historial_medico_asociado" Type="int" />
+        </EntityType>
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_mascota" Type="int" Nullable="false" />
+          <Property Name="id_empleado_asignado" Type="int" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="id_tipo_cita" Type="int" Nullable="false" />
+          <Property Name="fecha_hora_cita" Type="datetime" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="observaciones" Type="text" />
+          <Property Name="id_historial_medico_asociado" Type="int" />
+        </EntityType>
+        <EntityType Name="DETALLE_FACTURA">
+          <Key>
+            <PropertyRef Name="id_detalle_factura" />
+          </Key>
+          <Property Name="id_detalle_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_factura" Type="int" Nullable="false" />
+          <Property Name="tipo_item" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_item_referencia" Type="int" />
+          <Property Name="descripcion_item" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio_unitario" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="descuento_item" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal_item" Type="decimal" Precision="12" Scale="2" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="id_detalle_orden_compra" />
+          </Key>
+          <Property Name="id_detalle_orden_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_orden_compra" Type="int" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad_solicitada" Type="int" Nullable="false" />
+          <Property Name="precio_unitario_compra" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="subtotal" Type="decimal" Precision="12" Scale="2" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="DUENO">
+          <Key>
+            <PropertyRef Name="id_dueno" />
+          </Key>
+          <Property Name="id_dueno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="150" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_ingreso" Type="datetime" />
+          <Property Name="id_cargo_empleado" Type="int" Nullable="false" />
+          <Property Name="id_sede_trabajo" Type="int" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="ESPECIE_MASCOTA">
+          <Key>
+            <PropertyRef Name="id_especie" />
+          </Key>
+          <Property Name="id_especie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_especie" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_dueno" Type="int" Nullable="false" />
+          <Property Name="id_empleado_emite" Type="int" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="id_metodo_pago" Type="int" />
+          <Property Name="fecha_emision" Type="datetime" />
+          <Property Name="numero_factura" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="subtotal_factura" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="impuestos_factura" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="descuento_factura" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="total_factura" Type="decimal" Precision="12" Scale="2" StoreGeneratedPattern="Computed" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_pago" Type="datetime" />
+          <Property Name="observaciones" Type="text" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_MEDICO">
+          <Key>
+            <PropertyRef Name="id_historial" />
+          </Key>
+          <Property Name="id_historial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_mascota" Type="int" Nullable="false" />
+          <Property Name="id_empleado_veterinario" Type="int" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="fecha_atencion" Type="datetime" />
+          <Property Name="motivo_consulta" Type="text" />
+          <Property Name="diagnostico" Type="text" />
+          <Property Name="tratamiento_indicado" Type="text" />
+          <Property Name="observaciones" Type="text" />
+        </EntityType>
+        <EntityType Name="HOSPITALIZACION">
+          <Key>
+            <PropertyRef Name="id_hospitalizacion" />
+          </Key>
+          <Property Name="id_hospitalizacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_mascota" Type="int" Nullable="false" />
+          <Property Name="id_empleado_responsable" Type="int" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="id_cama_asignada" Type="int" />
+          <Property Name="fecha_ingreso" Type="datetime" />
+          <Property Name="fecha_salida_estimada" Type="datetime" />
+          <Property Name="fecha_salida_real" Type="datetime" />
+          <Property Name="motivo_ingreso" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="estado_actual" Type="varchar" MaxLength="50" />
+          <Property Name="id_historial_medico_ingreso" Type="int" />
+        </EntityType>
+        <EntityType Name="MASCOTA">
+          <Key>
+            <PropertyRef Name="id_mascota" />
+          </Key>
+          <Property Name="id_mascota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="peso_kg" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="id_raza" Type="int" Nullable="false" />
+          <Property Name="id_dueno" Type="int" Nullable="false" />
+          <Property Name="microchip_id" Type="varchar" MaxLength="50" />
+          <Property Name="notas_adicionales" Type="text" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="activa" Type="bit" />
+        </EntityType>
+        <EntityType Name="METODO_PAGO">
+          <Key>
+            <PropertyRef Name="id_metodo_pago" />
+          </Key>
+          <Property Name="id_metodo_pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_metodo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="id_orden_compra" />
+          </Key>
+          <Property Name="id_orden_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_proveedor" Type="int" Nullable="false" />
+          <Property Name="id_empleado_solicita" Type="int" Nullable="false" />
+          <Property Name="id_sede_destino" Type="int" Nullable="false" />
+          <Property Name="fecha_orden" Type="datetime" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="observaciones" Type="text" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="descripcion" Type="text" />
+          <Property Name="id_tipo_producto" Type="int" Nullable="false" />
+          <Property Name="codigo_barras" Type="varchar" MaxLength="100" />
+          <Property Name="precio_venta_sugerido" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="requiere_receta" Type="bit" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_empresa" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="nit_ruc" Type="varchar" MaxLength="30" />
+          <Property Name="contacto_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="contacto_telefono" Type="varchar" MaxLength="20" />
+          <Property Name="contacto_email" Type="varchar" MaxLength="150" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="RAZA_MASCOTA">
+          <Key>
+            <PropertyRef Name="id_raza" />
+          </Key>
+          <Property Name="id_raza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_raza" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_especie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="SEDE">
+          <Key>
+            <PropertyRef Name="id_sede" />
+          </Key>
+          <Property Name="id_sede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_sede" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="ciudad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_empleado_encargado" Type="int" />
+          <Property Name="activa" Type="bit" />
+          <Property Name="fecha_creacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SERVICIO_ADICIONAL_PRESTADO">
+          <Key>
+            <PropertyRef Name="id_servicio_prestado" />
+          </Key>
+          <Property Name="id_servicio_prestado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_mascota" Type="int" Nullable="false" />
+          <Property Name="id_tipo_servicio_adicional" Type="int" Nullable="false" />
+          <Property Name="id_empleado_realiza" Type="int" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="fecha_servicio" Type="datetime" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="costo_final" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="id_historial_medico_asociado" Type="int" />
+        </EntityType>
+        <EntityType Name="STOCK_PRODUCTO_SEDE">
+          <Key>
+            <PropertyRef Name="id_stock_producto_sede" />
+          </Key>
+          <Property Name="id_stock_producto_sede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_sede" Type="int" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="cantidad_disponible" Type="int" Nullable="false" />
+          <Property Name="stock_minimo" Type="int" />
+          <Property Name="lote" Type="varchar" MaxLength="50" />
+          <Property Name="fecha_vencimiento" Type="date" />
+          <Property Name="ultima_actualizacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TIPO_CIRUGIA">
+          <Key>
+            <PropertyRef Name="id_tipo_cirugia" />
+          </Key>
+          <Property Name="id_tipo_cirugia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_tipo_cirugia" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="descripcion" Type="text" />
+        </EntityType>
+        <EntityType Name="TIPO_CITA">
+          <Key>
+            <PropertyRef Name="id_tipo_cita" />
+          </Key>
+          <Property Name="id_tipo_cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_tipo_cita" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="duracion_estimada_minutos" Type="int" />
+        </EntityType>
+        <EntityType Name="TIPO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="id_tipo_producto" />
+          </Key>
+          <Property Name="id_tipo_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_tipo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TIPO_SERVICIO_ADICIONAL">
+          <Key>
+            <PropertyRef Name="id_tipo_servicio_adicional" />
+          </Key>
+          <Property Name="id_tipo_servicio_adicional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_servicio" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="precio_base" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="TRATAMIENTO_APLICADO">
+          <Key>
+            <PropertyRef Name="id_tratamiento_aplicado" />
+          </Key>
+          <Property Name="id_tratamiento_aplicado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_historial_medico" Type="int" Nullable="false" />
+          <Property Name="id_hospitalizacion" Type="int" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+          <Property Name="id_empleado_aplica" Type="int" Nullable="false" />
+          <Property Name="fecha_hora_aplicacion" Type="datetime" />
+          <Property Name="cantidad_aplicada" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="unidad_medida" Type="varchar" MaxLength="20" />
+          <Property Name="observaciones" Type="text" />
+          <Property Name="costo_tratamiento" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_empleado" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave_hash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="salt" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="ultimo_login" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USUARIO_ROL">
+          <Key>
+            <PropertyRef Name="id_usuario_rol" />
+          </Key>
+          <Property Name="id_usuario_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
+          <Property Name="fecha_asignacion" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Cama_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAMA" Type="Self.CAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CAMA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Cirujano">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_empleado_cirujano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_TipoCirugia">
+          <End Role="TIPO_CIRUGIA" Type="Self.TIPO_CIRUGIA" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CIRUGIA">
+              <PropertyRef Name="id_tipo_cirugia" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_tipo_cirugia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_empleado_asignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_TipoCita">
+          <End Role="TIPO_CITA" Type="Self.TIPO_CITA" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CITA">
+              <PropertyRef Name="id_tipo_cita" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_tipo_cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCompra_Orden">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_ORDEN_COMPRA" Type="Self.DETALLE_ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_orden_compra" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_COMPRA">
+              <PropertyRef Name="id_orden_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCompra_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN_COMPRA" Type="Self.DETALLE_ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_COMPRA">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Factura">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="DETALLE_FACTURA">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo">
+          <End Role="CARGO_EMPLEADO" Type="Self.CARGO_EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO_EMPLEADO">
+              <PropertyRef Name="id_cargo_empleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="id_cargo_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="id_sede_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Dueno">
+          <End Role="DUENO" Type="Self.DUENO" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DUENO">
+              <PropertyRef Name="id_dueno" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_dueno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_empleado_emite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_MetodoPago">
+          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODO_PAGO">
+              <PropertyRef Name="id_metodo_pago" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_metodo_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_empleado_veterinario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Cama">
+          <End Role="CAMA" Type="Self.CAMA" Multiplicity="0..1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAMA">
+              <PropertyRef Name="id_cama" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_cama_asignada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_empleado_responsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Historial">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_historial_medico_ingreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Dueno">
+          <End Role="DUENO" Type="Self.DUENO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DUENO">
+              <PropertyRef Name="id_dueno" />
+            </Principal>
+            <Dependent Role="MASCOTA">
+              <PropertyRef Name="id_dueno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Raza">
+          <End Role="RAZA_MASCOTA" Type="Self.RAZA_MASCOTA" Multiplicity="1" />
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RAZA_MASCOTA">
+              <PropertyRef Name="id_raza" />
+            </Principal>
+            <Dependent Role="MASCOTA">
+              <PropertyRef Name="id_raza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_empleado_solicita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Proveedor">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_sede_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRODUCTO">
+              <PropertyRef Name="id_tipo_producto" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="id_tipo_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Raza_Especie">
+          <End Role="ESPECIE_MASCOTA" Type="Self.ESPECIE_MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RAZA_MASCOTA" Type="Self.RAZA_MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIE_MASCOTA">
+              <PropertyRef Name="id_especie" />
+            </Principal>
+            <Dependent Role="RAZA_MASCOTA">
+              <PropertyRef Name="id_especie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sede_Encargado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="SEDE">
+              <PropertyRef Name="id_empleado_encargado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_empleado_realiza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Tipo">
+          <End Role="TIPO_SERVICIO_ADICIONAL" Type="Self.TIPO_SERVICIO_ADICIONAL" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_SERVICIO_ADICIONAL">
+              <PropertyRef Name="id_tipo_servicio_adicional" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_tipo_servicio_adicional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STOCK_PRODUCTO_SEDE" Type="Self.STOCK_PRODUCTO_SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="STOCK_PRODUCTO_SEDE">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STOCK_PRODUCTO_SEDE" Type="Self.STOCK_PRODUCTO_SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="STOCK_PRODUCTO_SEDE">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_empleado_aplica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Historial">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_historial_medico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Hospitalizacion">
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="0..1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOSPITALIZACION">
+              <PropertyRef Name="id_hospitalizacion" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_hospitalizacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Rol">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO_ROL" Type="Self.USUARIO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="USUARIO_ROL">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO_ROL" Type="Self.USUARIO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="USUARIO_ROL">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VeterinariaModelStoreContainer">
+          <EntitySet Name="CAMA" EntityType="Self.CAMA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CARGO_EMPLEADO" EntityType="Self.CARGO_EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIRUGIA" EntityType="Self.CIRUGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITA" EntityType="Self.CITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_ORDEN_COMPRA" EntityType="Self.DETALLE_ORDEN_COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DUENO" EntityType="Self.DUENO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESPECIE_MASCOTA" EntityType="Self.ESPECIE_MASCOTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORIAL_MEDICO" EntityType="Self.HISTORIAL_MEDICO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOSPITALIZACION" EntityType="Self.HOSPITALIZACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MASCOTA" EntityType="Self.MASCOTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="METODO_PAGO" EntityType="Self.METODO_PAGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDEN_COMPRA" EntityType="Self.ORDEN_COMPRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RAZA_MASCOTA" EntityType="Self.RAZA_MASCOTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEDE" EntityType="Self.SEDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICIO_ADICIONAL_PRESTADO" EntityType="Self.SERVICIO_ADICIONAL_PRESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STOCK_PRODUCTO_SEDE" EntityType="Self.STOCK_PRODUCTO_SEDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CIRUGIA" EntityType="Self.TIPO_CIRUGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_CITA" EntityType="Self.TIPO_CITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_SERVICIO_ADICIONAL" EntityType="Self.TIPO_SERVICIO_ADICIONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRATAMIENTO_APLICADO" EntityType="Self.TRATAMIENTO_APLICADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_ROL" EntityType="Self.USUARIO_ROL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cama_Sede" Association="Self.FK_Cama_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="CAMA" EntitySet="CAMA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Cirujano" Association="Self.FK_Cirugia_Cirujano">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_HistorialMedico" Association="Self.FK_Cirugia_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Mascota" Association="Self.FK_Cirugia_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Sede" Association="Self.FK_Cirugia_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_TipoCirugia" Association="Self.FK_Cirugia_TipoCirugia">
+            <End Role="TIPO_CIRUGIA" EntitySet="TIPO_CIRUGIA" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Empleado" Association="Self.FK_Cita_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_HistorialMedico" Association="Self.FK_Cita_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Mascota" Association="Self.FK_Cita_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Sede" Association="Self.FK_Cita_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_TipoCita" Association="Self.FK_Cita_TipoCita">
+            <End Role="TIPO_CITA" EntitySet="TIPO_CITA" />
+            <End Role="CITA" EntitySet="CITA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCompra_Orden" Association="Self.FK_DetalleCompra_Orden">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DETALLE_ORDEN_COMPRA" EntitySet="DETALLE_ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCompra_Producto" Association="Self.FK_DetalleCompra_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN_COMPRA" EntitySet="DETALLE_ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Factura" Association="Self.FK_DetalleFactura_Factura">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo" Association="Self.FK_Empleado_Cargo">
+            <End Role="CARGO_EMPLEADO" EntitySet="CARGO_EMPLEADO" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Sede" Association="Self.FK_Empleado_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Dueno" Association="Self.FK_Factura_Dueno">
+            <End Role="DUENO" EntitySet="DUENO" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Empleado" Association="Self.FK_Factura_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_MetodoPago" Association="Self.FK_Factura_MetodoPago">
+            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Sede" Association="Self.FK_Factura_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Empleado" Association="Self.FK_Historial_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Mascota" Association="Self.FK_Historial_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Sede" Association="Self.FK_Historial_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Cama" Association="Self.FK_Hospitalizacion_Cama">
+            <End Role="CAMA" EntitySet="CAMA" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Empleado" Association="Self.FK_Hospitalizacion_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Historial" Association="Self.FK_Hospitalizacion_Historial">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Mascota" Association="Self.FK_Hospitalizacion_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Sede" Association="Self.FK_Hospitalizacion_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Dueno" Association="Self.FK_Mascota_Dueno">
+            <End Role="DUENO" EntitySet="DUENO" />
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Raza" Association="Self.FK_Mascota_Raza">
+            <End Role="RAZA_MASCOTA" EntitySet="RAZA_MASCOTA" />
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Empleado" Association="Self.FK_OrdenCompra_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Proveedor" Association="Self.FK_OrdenCompra_Proveedor">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Sede" Association="Self.FK_OrdenCompra_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Raza_Especie" Association="Self.FK_Raza_Especie">
+            <End Role="ESPECIE_MASCOTA" EntitySet="ESPECIE_MASCOTA" />
+            <End Role="RAZA_MASCOTA" EntitySet="RAZA_MASCOTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sede_Encargado" Association="Self.FK_Sede_Encargado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="SEDE" EntitySet="SEDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Empleado" Association="Self.FK_ServicioPrestado_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_HistorialMedico" Association="Self.FK_ServicioPrestado_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Mascota" Association="Self.FK_ServicioPrestado_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTA" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Sede" Association="Self.FK_ServicioPrestado_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Tipo" Association="Self.FK_ServicioPrestado_Tipo">
+            <End Role="TIPO_SERVICIO_ADICIONAL" EntitySet="TIPO_SERVICIO_ADICIONAL" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Producto" Association="Self.FK_Stock_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="STOCK_PRODUCTO_SEDE" EntitySet="STOCK_PRODUCTO_SEDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Sede" Association="Self.FK_Stock_Sede">
+            <End Role="SEDE" EntitySet="SEDE" />
+            <End Role="STOCK_PRODUCTO_SEDE" EntitySet="STOCK_PRODUCTO_SEDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Empleado" Association="Self.FK_TratamientoAplicado_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Historial" Association="Self.FK_TratamientoAplicado_Historial">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Hospitalizacion" Association="Self.FK_TratamientoAplicado_Hospitalizacion">
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACION" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Producto" Association="Self.FK_TratamientoAplicado_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Rol" Association="Self.FK_UsuarioRol_Rol">
+            <End Role="ROL" EntitySet="ROL" />
+            <End Role="USUARIO_ROL" EntitySet="USUARIO_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Usuario" Association="Self.FK_UsuarioRol_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_ROL" EntitySet="USUARIO_ROL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VeterinariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CAMA">
+          <Key>
+            <PropertyRef Name="id_cama" />
+          </Key>
+          <Property Name="id_cama" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="numero_identificador" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_cama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Cama_Sede" FromRole="CAMA" ToRole="SEDE" />
+          <NavigationProperty Name="HOSPITALIZACIONs" Relationship="Self.FK_Hospitalizacion_Cama" FromRole="CAMA" ToRole="HOSPITALIZACION" />
+        </EntityType>
+        <EntityType Name="CARGO_EMPLEADO">
+          <Key>
+            <PropertyRef Name="id_cargo_empleado" />
+          </Key>
+          <Property Name="id_cargo_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="salario_base" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="EMPLEADOes" Relationship="Self.FK_Empleado_Cargo" FromRole="CARGO_EMPLEADO" ToRole="EMPLEADO" />
+        </EntityType>
+        <EntityType Name="CIRUGIA">
+          <Key>
+            <PropertyRef Name="id_cirugia" />
+          </Key>
+          <Property Name="id_cirugia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_mascota" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_cirugia" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_cirujano" Type="Int32" Nullable="false" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="fecha_hora_programada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="informe_quirurgico" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_historial_medico_asociado" Type="Int32" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Cirugia_Cirujano" FromRole="CIRUGIA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Cirugia_HistorialMedico" FromRole="CIRUGIA" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="MASCOTA" Relationship="Self.FK_Cirugia_Mascota" FromRole="CIRUGIA" ToRole="MASCOTA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Cirugia_Sede" FromRole="CIRUGIA" ToRole="SEDE" />
+          <NavigationProperty Name="TIPO_CIRUGIA" Relationship="Self.FK_Cirugia_TipoCirugia" FromRole="CIRUGIA" ToRole="TIPO_CIRUGIA" />
+        </EntityType>
+        <EntityType Name="CITA">
+          <Key>
+            <PropertyRef Name="id_cita" />
+          </Key>
+          <Property Name="id_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_mascota" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_asignado" Type="Int32" Nullable="false" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_cita" Type="Int32" Nullable="false" />
+          <Property Name="fecha_hora_cita" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_historial_medico_asociado" Type="Int32" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Cita_Empleado" FromRole="CITA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Cita_HistorialMedico" FromRole="CITA" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="MASCOTA" Relationship="Self.FK_Cita_Mascota" FromRole="CITA" ToRole="MASCOTA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Cita_Sede" FromRole="CITA" ToRole="SEDE" />
+          <NavigationProperty Name="TIPO_CITA" Relationship="Self.FK_Cita_TipoCita" FromRole="CITA" ToRole="TIPO_CITA" />
+        </EntityType>
+        <EntityType Name="DETALLE_FACTURA">
+          <Key>
+            <PropertyRef Name="id_detalle_factura" />
+          </Key>
+          <Property Name="id_detalle_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_factura" Type="Int32" Nullable="false" />
+          <Property Name="tipo_item" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_item_referencia" Type="Int32" />
+          <Property Name="descripcion_item" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio_unitario" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="descuento_item" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="subtotal_item" Type="Decimal" Precision="12" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_DetalleFactura_Factura" FromRole="DETALLE_FACTURA" ToRole="FACTURA" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="id_detalle_orden_compra" />
+          </Key>
+          <Property Name="id_detalle_orden_compra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_orden_compra" Type="Int32" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_solicitada" Type="Int32" Nullable="false" />
+          <Property Name="precio_unitario_compra" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="12" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_DetalleCompra_Orden" FromRole="DETALLE_ORDEN_COMPRA" ToRole="ORDEN_COMPRA" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_DetalleCompra_Producto" FromRole="DETALLE_ORDEN_COMPRA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DUENO">
+          <Key>
+            <PropertyRef Name="id_dueno" />
+          </Key>
+          <Property Name="id_dueno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK_Factura_Dueno" FromRole="DUENO" ToRole="FACTURA" />
+          <NavigationProperty Name="MASCOTAs" Relationship="Self.FK_Mascota_Dueno" FromRole="DUENO" ToRole="MASCOTA" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="id_cargo_empleado" Type="Int32" Nullable="false" />
+          <Property Name="id_sede_trabajo" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="CARGO_EMPLEADO" Relationship="Self.FK_Empleado_Cargo" FromRole="EMPLEADO" ToRole="CARGO_EMPLEADO" />
+          <NavigationProperty Name="CIRUGIAs" Relationship="Self.FK_Cirugia_Cirujano" FromRole="EMPLEADO" ToRole="CIRUGIA" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK_Cita_Empleado" FromRole="EMPLEADO" ToRole="CITA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Empleado_Sede" FromRole="EMPLEADO" ToRole="SEDE" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK_Factura_Empleado" FromRole="EMPLEADO" ToRole="FACTURA" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Historial_Empleado" FromRole="EMPLEADO" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="HOSPITALIZACIONs" Relationship="Self.FK_Hospitalizacion_Empleado" FromRole="EMPLEADO" ToRole="HOSPITALIZACION" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_OrdenCompra_Empleado" FromRole="EMPLEADO" ToRole="ORDEN_COMPRA" />
+          <NavigationProperty Name="SEDEs" Relationship="Self.FK_Sede_Encargado" FromRole="EMPLEADO" ToRole="SEDE" />
+          <NavigationProperty Name="SERVICIO_ADICIONAL_PRESTADO" Relationship="Self.FK_ServicioPrestado_Empleado" FromRole="EMPLEADO" ToRole="SERVICIO_ADICIONAL_PRESTADO" />
+          <NavigationProperty Name="TRATAMIENTO_APLICADO" Relationship="Self.FK_TratamientoAplicado_Empleado" FromRole="EMPLEADO" ToRole="TRATAMIENTO_APLICADO" />
+          <NavigationProperty Name="USUARIOs" Relationship="Self.FK_Usuario_Empleado" FromRole="EMPLEADO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="ESPECIE_MASCOTA">
+          <Key>
+            <PropertyRef Name="id_especie" />
+          </Key>
+          <Property Name="id_especie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_especie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RAZA_MASCOTA" Relationship="Self.FK_Raza_Especie" FromRole="ESPECIE_MASCOTA" ToRole="RAZA_MASCOTA" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_dueno" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_emite" Type="Int32" Nullable="false" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="id_metodo_pago" Type="Int32" />
+          <Property Name="fecha_emision" Type="DateTime" Precision="3" />
+          <Property Name="numero_factura" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subtotal_factura" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="impuestos_factura" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="descuento_factura" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="total_factura" Type="Decimal" Precision="12" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_pago" Type="DateTime" Precision="3" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_FACTURA" Relationship="Self.FK_DetalleFactura_Factura" FromRole="FACTURA" ToRole="DETALLE_FACTURA" />
+          <NavigationProperty Name="DUENO" Relationship="Self.FK_Factura_Dueno" FromRole="FACTURA" ToRole="DUENO" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Factura_Empleado" FromRole="FACTURA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="METODO_PAGO" Relationship="Self.FK_Factura_MetodoPago" FromRole="FACTURA" ToRole="METODO_PAGO" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Factura_Sede" FromRole="FACTURA" ToRole="SEDE" />
+        </EntityType>
+        <EntityType Name="HISTORIAL_MEDICO">
+          <Key>
+            <PropertyRef Name="id_historial" />
+          </Key>
+          <Property Name="id_historial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_mascota" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_veterinario" Type="Int32" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="fecha_atencion" Type="DateTime" Precision="3" />
+          <Property Name="motivo_consulta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="diagnostico" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tratamiento_indicado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CIRUGIAs" Relationship="Self.FK_Cirugia_HistorialMedico" FromRole="HISTORIAL_MEDICO" ToRole="CIRUGIA" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK_Cita_HistorialMedico" FromRole="HISTORIAL_MEDICO" ToRole="CITA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Historial_Empleado" FromRole="HISTORIAL_MEDICO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="MASCOTA" Relationship="Self.FK_Historial_Mascota" FromRole="HISTORIAL_MEDICO" ToRole="MASCOTA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Historial_Sede" FromRole="HISTORIAL_MEDICO" ToRole="SEDE" />
+          <NavigationProperty Name="HOSPITALIZACIONs" Relationship="Self.FK_Hospitalizacion_Historial" FromRole="HISTORIAL_MEDICO" ToRole="HOSPITALIZACION" />
+          <NavigationProperty Name="SERVICIO_ADICIONAL_PRESTADO" Relationship="Self.FK_ServicioPrestado_HistorialMedico" FromRole="HISTORIAL_MEDICO" ToRole="SERVICIO_ADICIONAL_PRESTADO" />
+          <NavigationProperty Name="TRATAMIENTO_APLICADO" Relationship="Self.FK_TratamientoAplicado_Historial" FromRole="HISTORIAL_MEDICO" ToRole="TRATAMIENTO_APLICADO" />
+        </EntityType>
+        <EntityType Name="HOSPITALIZACION">
+          <Key>
+            <PropertyRef Name="id_hospitalizacion" />
+          </Key>
+          <Property Name="id_hospitalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_mascota" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_responsable" Type="Int32" Nullable="false" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="id_cama_asignada" Type="Int32" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="fecha_salida_estimada" Type="DateTime" Precision="3" />
+          <Property Name="fecha_salida_real" Type="DateTime" Precision="3" />
+          <Property Name="motivo_ingreso" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado_actual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_historial_medico_ingreso" Type="Int32" />
+          <NavigationProperty Name="CAMA" Relationship="Self.FK_Hospitalizacion_Cama" FromRole="HOSPITALIZACION" ToRole="CAMA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Hospitalizacion_Empleado" FromRole="HOSPITALIZACION" ToRole="EMPLEADO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Hospitalizacion_Historial" FromRole="HOSPITALIZACION" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="MASCOTA" Relationship="Self.FK_Hospitalizacion_Mascota" FromRole="HOSPITALIZACION" ToRole="MASCOTA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Hospitalizacion_Sede" FromRole="HOSPITALIZACION" ToRole="SEDE" />
+          <NavigationProperty Name="TRATAMIENTO_APLICADO" Relationship="Self.FK_TratamientoAplicado_Hospitalizacion" FromRole="HOSPITALIZACION" ToRole="TRATAMIENTO_APLICADO" />
+        </EntityType>
+        <EntityType Name="MASCOTA">
+          <Key>
+            <PropertyRef Name="id_mascota" />
+          </Key>
+          <Property Name="id_mascota" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="peso_kg" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="id_raza" Type="Int32" Nullable="false" />
+          <Property Name="id_dueno" Type="Int32" Nullable="false" />
+          <Property Name="microchip_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notas_adicionales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="activa" Type="Boolean" />
+          <NavigationProperty Name="CIRUGIAs" Relationship="Self.FK_Cirugia_Mascota" FromRole="MASCOTA" ToRole="CIRUGIA" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK_Cita_Mascota" FromRole="MASCOTA" ToRole="CITA" />
+          <NavigationProperty Name="DUENO" Relationship="Self.FK_Mascota_Dueno" FromRole="MASCOTA" ToRole="DUENO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Historial_Mascota" FromRole="MASCOTA" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="HOSPITALIZACIONs" Relationship="Self.FK_Hospitalizacion_Mascota" FromRole="MASCOTA" ToRole="HOSPITALIZACION" />
+          <NavigationProperty Name="RAZA_MASCOTA" Relationship="Self.FK_Mascota_Raza" FromRole="MASCOTA" ToRole="RAZA_MASCOTA" />
+          <NavigationProperty Name="SERVICIO_ADICIONAL_PRESTADO" Relationship="Self.FK_ServicioPrestado_Mascota" FromRole="MASCOTA" ToRole="SERVICIO_ADICIONAL_PRESTADO" />
+        </EntityType>
+        <EntityType Name="METODO_PAGO">
+          <Key>
+            <PropertyRef Name="id_metodo_pago" />
+          </Key>
+          <Property Name="id_metodo_pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK_Factura_MetodoPago" FromRole="METODO_PAGO" ToRole="FACTURA" />
+        </EntityType>
+        <EntityType Name="ORDEN_COMPRA">
+          <Key>
+            <PropertyRef Name="id_orden_compra" />
+          </Key>
+          <Property Name="id_orden_compra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_solicita" Type="Int32" Nullable="false" />
+          <Property Name="id_sede_destino" Type="Int32" Nullable="false" />
+          <Property Name="fecha_orden" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_ORDEN_COMPRA" Relationship="Self.FK_DetalleCompra_Orden" FromRole="ORDEN_COMPRA" ToRole="DETALLE_ORDEN_COMPRA" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_OrdenCompra_Empleado" FromRole="ORDEN_COMPRA" ToRole="EMPLEADO" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK_OrdenCompra_Proveedor" FromRole="ORDEN_COMPRA" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_OrdenCompra_Sede" FromRole="ORDEN_COMPRA" ToRole="SEDE" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_tipo_producto" Type="Int32" Nullable="false" />
+          <Property Name="codigo_barras" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precio_venta_sugerido" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="requiere_receta" Type="Boolean" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="DETALLE_ORDEN_COMPRA" Relationship="Self.FK_DetalleCompra_Producto" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN_COMPRA" />
+          <NavigationProperty Name="TIPO_PRODUCTO" Relationship="Self.FK_Producto_TipoProducto" FromRole="PRODUCTO" ToRole="TIPO_PRODUCTO" />
+          <NavigationProperty Name="STOCK_PRODUCTO_SEDE" Relationship="Self.FK_Stock_Producto" FromRole="PRODUCTO" ToRole="STOCK_PRODUCTO_SEDE" />
+          <NavigationProperty Name="TRATAMIENTO_APLICADO" Relationship="Self.FK_TratamientoAplicado_Producto" FromRole="PRODUCTO" ToRole="TRATAMIENTO_APLICADO" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nit_ruc" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="contacto_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contacto_telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contacto_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_OrdenCompra_Proveedor" FromRole="PROVEEDOR" ToRole="ORDEN_COMPRA" />
+        </EntityType>
+        <EntityType Name="RAZA_MASCOTA">
+          <Key>
+            <PropertyRef Name="id_raza" />
+          </Key>
+          <Property Name="id_raza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_raza" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_especie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ESPECIE_MASCOTA" Relationship="Self.FK_Raza_Especie" FromRole="RAZA_MASCOTA" ToRole="ESPECIE_MASCOTA" />
+          <NavigationProperty Name="MASCOTAs" Relationship="Self.FK_Mascota_Raza" FromRole="RAZA_MASCOTA" ToRole="MASCOTA" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="USUARIO_ROL" Relationship="Self.FK_UsuarioRol_Rol" FromRole="ROL" ToRole="USUARIO_ROL" />
+        </EntityType>
+        <EntityType Name="SEDE">
+          <Key>
+            <PropertyRef Name="id_sede" />
+          </Key>
+          <Property Name="id_sede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_sede" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_empleado_encargado" Type="Int32" />
+          <Property Name="activa" Type="Boolean" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CAMAs" Relationship="Self.FK_Cama_Sede" FromRole="SEDE" ToRole="CAMA" />
+          <NavigationProperty Name="CIRUGIAs" Relationship="Self.FK_Cirugia_Sede" FromRole="SEDE" ToRole="CIRUGIA" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK_Cita_Sede" FromRole="SEDE" ToRole="CITA" />
+          <NavigationProperty Name="EMPLEADOes" Relationship="Self.FK_Empleado_Sede" FromRole="SEDE" ToRole="EMPLEADO" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Sede_Encargado" FromRole="SEDE" ToRole="EMPLEADO" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK_Factura_Sede" FromRole="SEDE" ToRole="FACTURA" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_Historial_Sede" FromRole="SEDE" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="HOSPITALIZACIONs" Relationship="Self.FK_Hospitalizacion_Sede" FromRole="SEDE" ToRole="HOSPITALIZACION" />
+          <NavigationProperty Name="ORDEN_COMPRA" Relationship="Self.FK_OrdenCompra_Sede" FromRole="SEDE" ToRole="ORDEN_COMPRA" />
+          <NavigationProperty Name="SERVICIO_ADICIONAL_PRESTADO" Relationship="Self.FK_ServicioPrestado_Sede" FromRole="SEDE" ToRole="SERVICIO_ADICIONAL_PRESTADO" />
+          <NavigationProperty Name="STOCK_PRODUCTO_SEDE" Relationship="Self.FK_Stock_Sede" FromRole="SEDE" ToRole="STOCK_PRODUCTO_SEDE" />
+        </EntityType>
+        <EntityType Name="SERVICIO_ADICIONAL_PRESTADO">
+          <Key>
+            <PropertyRef Name="id_servicio_prestado" />
+          </Key>
+          <Property Name="id_servicio_prestado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_mascota" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_servicio_adicional" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_realiza" Type="Int32" Nullable="false" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="fecha_servicio" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="costo_final" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="id_historial_medico_asociado" Type="Int32" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_ServicioPrestado_Empleado" FromRole="SERVICIO_ADICIONAL_PRESTADO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_ServicioPrestado_HistorialMedico" FromRole="SERVICIO_ADICIONAL_PRESTADO" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="MASCOTA" Relationship="Self.FK_ServicioPrestado_Mascota" FromRole="SERVICIO_ADICIONAL_PRESTADO" ToRole="MASCOTA" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_ServicioPrestado_Sede" FromRole="SERVICIO_ADICIONAL_PRESTADO" ToRole="SEDE" />
+          <NavigationProperty Name="TIPO_SERVICIO_ADICIONAL" Relationship="Self.FK_ServicioPrestado_Tipo" FromRole="SERVICIO_ADICIONAL_PRESTADO" ToRole="TIPO_SERVICIO_ADICIONAL" />
+        </EntityType>
+        <EntityType Name="STOCK_PRODUCTO_SEDE">
+          <Key>
+            <PropertyRef Name="id_stock_producto_sede" />
+          </Key>
+          <Property Name="id_stock_producto_sede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_sede" Type="Int32" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_disponible" Type="Int32" Nullable="false" />
+          <Property Name="stock_minimo" Type="Int32" />
+          <Property Name="lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_vencimiento" Type="DateTime" Precision="0" />
+          <Property Name="ultima_actualizacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_Stock_Producto" FromRole="STOCK_PRODUCTO_SEDE" ToRole="PRODUCTO" />
+          <NavigationProperty Name="SEDE" Relationship="Self.FK_Stock_Sede" FromRole="STOCK_PRODUCTO_SEDE" ToRole="SEDE" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CIRUGIA">
+          <Key>
+            <PropertyRef Name="id_tipo_cirugia" />
+          </Key>
+          <Property Name="id_tipo_cirugia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_tipo_cirugia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CIRUGIAs" Relationship="Self.FK_Cirugia_TipoCirugia" FromRole="TIPO_CIRUGIA" ToRole="CIRUGIA" />
+        </EntityType>
+        <EntityType Name="TIPO_CITA">
+          <Key>
+            <PropertyRef Name="id_tipo_cita" />
+          </Key>
+          <Property Name="id_tipo_cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_tipo_cita" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="duracion_estimada_minutos" Type="Int32" />
+          <NavigationProperty Name="CITAs" Relationship="Self.FK_Cita_TipoCita" FromRole="TIPO_CITA" ToRole="CITA" />
+        </EntityType>
+        <EntityType Name="TIPO_PRODUCTO">
+          <Key>
+            <PropertyRef Name="id_tipo_producto" />
+          </Key>
+          <Property Name="id_tipo_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_tipo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRODUCTOes" Relationship="Self.FK_Producto_TipoProducto" FromRole="TIPO_PRODUCTO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="TIPO_SERVICIO_ADICIONAL">
+          <Key>
+            <PropertyRef Name="id_tipo_servicio_adicional" />
+          </Key>
+          <Property Name="id_tipo_servicio_adicional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_servicio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="precio_base" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="SERVICIO_ADICIONAL_PRESTADO" Relationship="Self.FK_ServicioPrestado_Tipo" FromRole="TIPO_SERVICIO_ADICIONAL" ToRole="SERVICIO_ADICIONAL_PRESTADO" />
+        </EntityType>
+        <EntityType Name="TRATAMIENTO_APLICADO">
+          <Key>
+            <PropertyRef Name="id_tratamiento_aplicado" />
+          </Key>
+          <Property Name="id_tratamiento_aplicado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_historial_medico" Type="Int32" Nullable="false" />
+          <Property Name="id_hospitalizacion" Type="Int32" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_empleado_aplica" Type="Int32" Nullable="false" />
+          <Property Name="fecha_hora_aplicacion" Type="DateTime" Precision="3" />
+          <Property Name="cantidad_aplicada" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="unidad_medida" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="costo_tratamiento" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_TratamientoAplicado_Empleado" FromRole="TRATAMIENTO_APLICADO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="HISTORIAL_MEDICO" Relationship="Self.FK_TratamientoAplicado_Historial" FromRole="TRATAMIENTO_APLICADO" ToRole="HISTORIAL_MEDICO" />
+          <NavigationProperty Name="HOSPITALIZACION" Relationship="Self.FK_TratamientoAplicado_Hospitalizacion" FromRole="TRATAMIENTO_APLICADO" ToRole="HOSPITALIZACION" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK_TratamientoAplicado_Producto" FromRole="TRATAMIENTO_APLICADO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_empleado" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salt" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="ultimo_login" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_Usuario_Empleado" FromRole="USUARIO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="USUARIO_ROL" Relationship="Self.FK_UsuarioRol_Usuario" FromRole="USUARIO" ToRole="USUARIO_ROL" />
+        </EntityType>
+        <EntityType Name="USUARIO_ROL">
+          <Key>
+            <PropertyRef Name="id_usuario_rol" />
+          </Key>
+          <Property Name="id_usuario_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
+          <Property Name="fecha_asignacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ROL" Relationship="Self.FK_UsuarioRol_Rol" FromRole="USUARIO_ROL" ToRole="ROL" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_UsuarioRol_Usuario" FromRole="USUARIO_ROL" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK_Cama_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CAMA" Type="Self.CAMA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CAMA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Cama">
+          <End Role="CAMA" Type="Self.CAMA" Multiplicity="0..1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CAMA">
+              <PropertyRef Name="id_cama" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_cama_asignada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Cargo">
+          <End Role="CARGO_EMPLEADO" Type="Self.CARGO_EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO_EMPLEADO">
+              <PropertyRef Name="id_cargo_empleado" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="id_cargo_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Cirujano">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_empleado_cirujano" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cirugia_TipoCirugia">
+          <End Role="TIPO_CIRUGIA" Type="Self.TIPO_CIRUGIA" Multiplicity="1" />
+          <End Role="CIRUGIA" Type="Self.CIRUGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CIRUGIA">
+              <PropertyRef Name="id_tipo_cirugia" />
+            </Principal>
+            <Dependent Role="CIRUGIA">
+              <PropertyRef Name="id_tipo_cirugia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_empleado_asignado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cita_TipoCita">
+          <End Role="TIPO_CITA" Type="Self.TIPO_CITA" Multiplicity="1" />
+          <End Role="CITA" Type="Self.CITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CITA">
+              <PropertyRef Name="id_tipo_cita" />
+            </Principal>
+            <Dependent Role="CITA">
+              <PropertyRef Name="id_tipo_cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFactura_Factura">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_FACTURA" Type="Self.DETALLE_FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="DETALLE_FACTURA">
+              <PropertyRef Name="id_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCompra_Orden">
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DETALLE_ORDEN_COMPRA" Type="Self.DETALLE_ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_orden_compra" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_COMPRA">
+              <PropertyRef Name="id_orden_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCompra_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN_COMPRA" Type="Self.DETALLE_ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_COMPRA">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Dueno">
+          <End Role="DUENO" Type="Self.DUENO" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DUENO">
+              <PropertyRef Name="id_dueno" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_dueno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Dueno">
+          <End Role="DUENO" Type="Self.DUENO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DUENO">
+              <PropertyRef Name="id_dueno" />
+            </Principal>
+            <Dependent Role="MASCOTA">
+              <PropertyRef Name="id_dueno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="EMPLEADO">
+              <PropertyRef Name="id_sede_trabajo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_empleado_emite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_empleado_veterinario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_empleado_responsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_empleado_solicita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sede_Encargado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="SEDE">
+              <PropertyRef Name="id_empleado_encargado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_empleado_realiza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_empleado_aplica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Empleado">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Raza_Especie">
+          <End Role="ESPECIE_MASCOTA" Type="Self.ESPECIE_MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RAZA_MASCOTA" Type="Self.RAZA_MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIE_MASCOTA">
+              <PropertyRef Name="id_especie" />
+            </Principal>
+            <Dependent Role="RAZA_MASCOTA">
+              <PropertyRef Name="id_especie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_MetodoPago">
+          <End Role="METODO_PAGO" Type="Self.METODO_PAGO" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="METODO_PAGO">
+              <PropertyRef Name="id_metodo_pago" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_metodo_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Historial_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Historial">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_historial_medico_ingreso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_HistorialMedico">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="0..1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_historial_medico_asociado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Historial">
+          <End Role="HISTORIAL_MEDICO" Type="Self.HISTORIAL_MEDICO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORIAL_MEDICO">
+              <PropertyRef Name="id_historial" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_historial_medico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitalizacion_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="HOSPITALIZACION">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Hospitalizacion">
+          <End Role="HOSPITALIZACION" Type="Self.HOSPITALIZACION" Multiplicity="0..1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOSPITALIZACION">
+              <PropertyRef Name="id_hospitalizacion" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_hospitalizacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mascota_Raza">
+          <End Role="RAZA_MASCOTA" Type="Self.RAZA_MASCOTA" Multiplicity="1" />
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RAZA_MASCOTA">
+              <PropertyRef Name="id_raza" />
+            </Principal>
+            <Dependent Role="MASCOTA">
+              <PropertyRef Name="id_raza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Mascota">
+          <End Role="MASCOTA" Type="Self.MASCOTA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MASCOTA">
+              <PropertyRef Name="id_mascota" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_mascota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Proveedor">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenCompra_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="ORDEN_COMPRA" Type="Self.ORDEN_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="ORDEN_COMPRA">
+              <PropertyRef Name="id_sede_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Role="TIPO_PRODUCTO" Type="Self.TIPO_PRODUCTO" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRODUCTO">
+              <PropertyRef Name="id_tipo_producto" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="id_tipo_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STOCK_PRODUCTO_SEDE" Type="Self.STOCK_PRODUCTO_SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="STOCK_PRODUCTO_SEDE">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TratamientoAplicado_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="TRATAMIENTO_APLICADO" Type="Self.TRATAMIENTO_APLICADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="id_producto" />
+            </Principal>
+            <Dependent Role="TRATAMIENTO_APLICADO">
+              <PropertyRef Name="id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Rol">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO_ROL" Type="Self.USUARIO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROL">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="USUARIO_ROL">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stock_Sede">
+          <End Role="SEDE" Type="Self.SEDE" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="STOCK_PRODUCTO_SEDE" Type="Self.STOCK_PRODUCTO_SEDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEDE">
+              <PropertyRef Name="id_sede" />
+            </Principal>
+            <Dependent Role="STOCK_PRODUCTO_SEDE">
+              <PropertyRef Name="id_sede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPrestado_Tipo">
+          <End Role="TIPO_SERVICIO_ADICIONAL" Type="Self.TIPO_SERVICIO_ADICIONAL" Multiplicity="1" />
+          <End Role="SERVICIO_ADICIONAL_PRESTADO" Type="Self.SERVICIO_ADICIONAL_PRESTADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_SERVICIO_ADICIONAL">
+              <PropertyRef Name="id_tipo_servicio_adicional" />
+            </Principal>
+            <Dependent Role="SERVICIO_ADICIONAL_PRESTADO">
+              <PropertyRef Name="id_tipo_servicio_adicional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="USUARIO_ROL" Type="Self.USUARIO_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="USUARIO_ROL">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VeterinariaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CAMAs" EntityType="Self.CAMA" />
+          <EntitySet Name="CARGO_EMPLEADO" EntityType="Self.CARGO_EMPLEADO" />
+          <EntitySet Name="CIRUGIAs" EntityType="Self.CIRUGIA" />
+          <EntitySet Name="CITAs" EntityType="Self.CITA" />
+          <EntitySet Name="DETALLE_FACTURA" EntityType="Self.DETALLE_FACTURA" />
+          <EntitySet Name="DETALLE_ORDEN_COMPRA" EntityType="Self.DETALLE_ORDEN_COMPRA" />
+          <EntitySet Name="DUENOes" EntityType="Self.DUENO" />
+          <EntitySet Name="EMPLEADOes" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="ESPECIE_MASCOTA" EntityType="Self.ESPECIE_MASCOTA" />
+          <EntitySet Name="FACTURAs" EntityType="Self.FACTURA" />
+          <EntitySet Name="HISTORIAL_MEDICO" EntityType="Self.HISTORIAL_MEDICO" />
+          <EntitySet Name="HOSPITALIZACIONs" EntityType="Self.HOSPITALIZACION" />
+          <EntitySet Name="MASCOTAs" EntityType="Self.MASCOTA" />
+          <EntitySet Name="METODO_PAGO" EntityType="Self.METODO_PAGO" />
+          <EntitySet Name="ORDEN_COMPRA" EntityType="Self.ORDEN_COMPRA" />
+          <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROVEEDORs" EntityType="Self.PROVEEDOR" />
+          <EntitySet Name="RAZA_MASCOTA" EntityType="Self.RAZA_MASCOTA" />
+          <EntitySet Name="ROLs" EntityType="Self.ROL" />
+          <EntitySet Name="SEDEs" EntityType="Self.SEDE" />
+          <EntitySet Name="SERVICIO_ADICIONAL_PRESTADO" EntityType="Self.SERVICIO_ADICIONAL_PRESTADO" />
+          <EntitySet Name="STOCK_PRODUCTO_SEDE" EntityType="Self.STOCK_PRODUCTO_SEDE" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TIPO_CIRUGIA" EntityType="Self.TIPO_CIRUGIA" />
+          <EntitySet Name="TIPO_CITA" EntityType="Self.TIPO_CITA" />
+          <EntitySet Name="TIPO_PRODUCTO" EntityType="Self.TIPO_PRODUCTO" />
+          <EntitySet Name="TIPO_SERVICIO_ADICIONAL" EntityType="Self.TIPO_SERVICIO_ADICIONAL" />
+          <EntitySet Name="TRATAMIENTO_APLICADO" EntityType="Self.TRATAMIENTO_APLICADO" />
+          <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+          <EntitySet Name="USUARIO_ROL" EntityType="Self.USUARIO_ROL" />
+          <AssociationSet Name="FK_Cama_Sede" Association="Self.FK_Cama_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="CAMA" EntitySet="CAMAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Cama" Association="Self.FK_Hospitalizacion_Cama">
+            <End Role="CAMA" EntitySet="CAMAs" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Cargo" Association="Self.FK_Empleado_Cargo">
+            <End Role="CARGO_EMPLEADO" EntitySet="CARGO_EMPLEADO" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Cirujano" Association="Self.FK_Cirugia_Cirujano">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_HistorialMedico" Association="Self.FK_Cirugia_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Mascota" Association="Self.FK_Cirugia_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_Sede" Association="Self.FK_Cirugia_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cirugia_TipoCirugia" Association="Self.FK_Cirugia_TipoCirugia">
+            <End Role="TIPO_CIRUGIA" EntitySet="TIPO_CIRUGIA" />
+            <End Role="CIRUGIA" EntitySet="CIRUGIAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Empleado" Association="Self.FK_Cita_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_HistorialMedico" Association="Self.FK_Cita_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Mascota" Association="Self.FK_Cita_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_Sede" Association="Self.FK_Cita_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cita_TipoCita" Association="Self.FK_Cita_TipoCita">
+            <End Role="TIPO_CITA" EntitySet="TIPO_CITA" />
+            <End Role="CITA" EntitySet="CITAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Factura" Association="Self.FK_DetalleFactura_Factura">
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+            <End Role="DETALLE_FACTURA" EntitySet="DETALLE_FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCompra_Orden" Association="Self.FK_DetalleCompra_Orden">
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+            <End Role="DETALLE_ORDEN_COMPRA" EntitySet="DETALLE_ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCompra_Producto" Association="Self.FK_DetalleCompra_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="DETALLE_ORDEN_COMPRA" EntitySet="DETALLE_ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Dueno" Association="Self.FK_Factura_Dueno">
+            <End Role="DUENO" EntitySet="DUENOes" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Dueno" Association="Self.FK_Mascota_Dueno">
+            <End Role="DUENO" EntitySet="DUENOes" />
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Sede" Association="Self.FK_Empleado_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Empleado" Association="Self.FK_Factura_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Empleado" Association="Self.FK_Historial_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Empleado" Association="Self.FK_Hospitalizacion_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Empleado" Association="Self.FK_OrdenCompra_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sede_Encargado" Association="Self.FK_Sede_Encargado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="SEDE" EntitySet="SEDEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Empleado" Association="Self.FK_ServicioPrestado_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Empleado" Association="Self.FK_TratamientoAplicado_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
+            <End Role="EMPLEADO" EntitySet="EMPLEADOes" />
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Raza_Especie" Association="Self.FK_Raza_Especie">
+            <End Role="ESPECIE_MASCOTA" EntitySet="ESPECIE_MASCOTA" />
+            <End Role="RAZA_MASCOTA" EntitySet="RAZA_MASCOTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_MetodoPago" Association="Self.FK_Factura_MetodoPago">
+            <End Role="METODO_PAGO" EntitySet="METODO_PAGO" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Sede" Association="Self.FK_Factura_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Mascota" Association="Self.FK_Historial_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Historial_Sede" Association="Self.FK_Historial_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Historial" Association="Self.FK_Hospitalizacion_Historial">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_HistorialMedico" Association="Self.FK_ServicioPrestado_HistorialMedico">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Historial" Association="Self.FK_TratamientoAplicado_Historial">
+            <End Role="HISTORIAL_MEDICO" EntitySet="HISTORIAL_MEDICO" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Mascota" Association="Self.FK_Hospitalizacion_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitalizacion_Sede" Association="Self.FK_Hospitalizacion_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Hospitalizacion" Association="Self.FK_TratamientoAplicado_Hospitalizacion">
+            <End Role="HOSPITALIZACION" EntitySet="HOSPITALIZACIONs" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mascota_Raza" Association="Self.FK_Mascota_Raza">
+            <End Role="RAZA_MASCOTA" EntitySet="RAZA_MASCOTA" />
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Mascota" Association="Self.FK_ServicioPrestado_Mascota">
+            <End Role="MASCOTA" EntitySet="MASCOTAs" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Proveedor" Association="Self.FK_OrdenCompra_Proveedor">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDORs" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenCompra_Sede" Association="Self.FK_OrdenCompra_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="ORDEN_COMPRA" EntitySet="ORDEN_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
+            <End Role="TIPO_PRODUCTO" EntitySet="TIPO_PRODUCTO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Producto" Association="Self.FK_Stock_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="STOCK_PRODUCTO_SEDE" EntitySet="STOCK_PRODUCTO_SEDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TratamientoAplicado_Producto" Association="Self.FK_TratamientoAplicado_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="TRATAMIENTO_APLICADO" EntitySet="TRATAMIENTO_APLICADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Rol" Association="Self.FK_UsuarioRol_Rol">
+            <End Role="ROL" EntitySet="ROLs" />
+            <End Role="USUARIO_ROL" EntitySet="USUARIO_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Sede" Association="Self.FK_ServicioPrestado_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stock_Sede" Association="Self.FK_Stock_Sede">
+            <End Role="SEDE" EntitySet="SEDEs" />
+            <End Role="STOCK_PRODUCTO_SEDE" EntitySet="STOCK_PRODUCTO_SEDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPrestado_Tipo" Association="Self.FK_ServicioPrestado_Tipo">
+            <End Role="TIPO_SERVICIO_ADICIONAL" EntitySet="TIPO_SERVICIO_ADICIONAL" />
+            <End Role="SERVICIO_ADICIONAL_PRESTADO" EntitySet="SERVICIO_ADICIONAL_PRESTADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Usuario" Association="Self.FK_UsuarioRol_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="USUARIO_ROL" EntitySet="USUARIO_ROL" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VeterinariaModelStoreContainer" CdmEntityContainer="VeterinariaEntities">
+          <EntitySetMapping Name="CAMAs">
+            <EntityTypeMapping TypeName="VeterinariaModel.CAMA">
+              <MappingFragment StoreEntitySet="CAMA">
+                <ScalarProperty Name="id_cama" ColumnName="id_cama" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="numero_identificador" ColumnName="numero_identificador" />
+                <ScalarProperty Name="tipo_cama" ColumnName="tipo_cama" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGO_EMPLEADO">
+            <EntityTypeMapping TypeName="VeterinariaModel.CARGO_EMPLEADO">
+              <MappingFragment StoreEntitySet="CARGO_EMPLEADO">
+                <ScalarProperty Name="id_cargo_empleado" ColumnName="id_cargo_empleado" />
+                <ScalarProperty Name="nombre_cargo" ColumnName="nombre_cargo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="salario_base" ColumnName="salario_base" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIRUGIAs">
+            <EntityTypeMapping TypeName="VeterinariaModel.CIRUGIA">
+              <MappingFragment StoreEntitySet="CIRUGIA">
+                <ScalarProperty Name="id_cirugia" ColumnName="id_cirugia" />
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="id_tipo_cirugia" ColumnName="id_tipo_cirugia" />
+                <ScalarProperty Name="id_empleado_cirujano" ColumnName="id_empleado_cirujano" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="fecha_hora_programada" ColumnName="fecha_hora_programada" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="informe_quirurgico" ColumnName="informe_quirurgico" />
+                <ScalarProperty Name="id_historial_medico_asociado" ColumnName="id_historial_medico_asociado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITAs">
+            <EntityTypeMapping TypeName="VeterinariaModel.CITA">
+              <MappingFragment StoreEntitySet="CITA">
+                <ScalarProperty Name="id_cita" ColumnName="id_cita" />
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="id_empleado_asignado" ColumnName="id_empleado_asignado" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="id_tipo_cita" ColumnName="id_tipo_cita" />
+                <ScalarProperty Name="fecha_hora_cita" ColumnName="fecha_hora_cita" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="id_historial_medico_asociado" ColumnName="id_historial_medico_asociado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_FACTURA">
+            <EntityTypeMapping TypeName="VeterinariaModel.DETALLE_FACTURA">
+              <MappingFragment StoreEntitySet="DETALLE_FACTURA">
+                <ScalarProperty Name="id_detalle_factura" ColumnName="id_detalle_factura" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="tipo_item" ColumnName="tipo_item" />
+                <ScalarProperty Name="id_item_referencia" ColumnName="id_item_referencia" />
+                <ScalarProperty Name="descripcion_item" ColumnName="descripcion_item" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_unitario" ColumnName="precio_unitario" />
+                <ScalarProperty Name="descuento_item" ColumnName="descuento_item" />
+                <ScalarProperty Name="subtotal_item" ColumnName="subtotal_item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN_COMPRA">
+            <EntityTypeMapping TypeName="VeterinariaModel.DETALLE_ORDEN_COMPRA">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN_COMPRA">
+                <ScalarProperty Name="id_detalle_orden_compra" ColumnName="id_detalle_orden_compra" />
+                <ScalarProperty Name="id_orden_compra" ColumnName="id_orden_compra" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="cantidad_solicitada" ColumnName="cantidad_solicitada" />
+                <ScalarProperty Name="precio_unitario_compra" ColumnName="precio_unitario_compra" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DUENOes">
+            <EntityTypeMapping TypeName="VeterinariaModel.DUENO">
+              <MappingFragment StoreEntitySet="DUENO">
+                <ScalarProperty Name="id_dueno" ColumnName="id_dueno" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADOes">
+            <EntityTypeMapping TypeName="VeterinariaModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="id_cargo_empleado" ColumnName="id_cargo_empleado" />
+                <ScalarProperty Name="id_sede_trabajo" ColumnName="id_sede_trabajo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESPECIE_MASCOTA">
+            <EntityTypeMapping TypeName="VeterinariaModel.ESPECIE_MASCOTA">
+              <MappingFragment StoreEntitySet="ESPECIE_MASCOTA">
+                <ScalarProperty Name="id_especie" ColumnName="id_especie" />
+                <ScalarProperty Name="nombre_especie" ColumnName="nombre_especie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURAs">
+            <EntityTypeMapping TypeName="VeterinariaModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="id_dueno" ColumnName="id_dueno" />
+                <ScalarProperty Name="id_empleado_emite" ColumnName="id_empleado_emite" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="id_metodo_pago" ColumnName="id_metodo_pago" />
+                <ScalarProperty Name="fecha_emision" ColumnName="fecha_emision" />
+                <ScalarProperty Name="numero_factura" ColumnName="numero_factura" />
+                <ScalarProperty Name="subtotal_factura" ColumnName="subtotal_factura" />
+                <ScalarProperty Name="impuestos_factura" ColumnName="impuestos_factura" />
+                <ScalarProperty Name="descuento_factura" ColumnName="descuento_factura" />
+                <ScalarProperty Name="total_factura" ColumnName="total_factura" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORIAL_MEDICO">
+            <EntityTypeMapping TypeName="VeterinariaModel.HISTORIAL_MEDICO">
+              <MappingFragment StoreEntitySet="HISTORIAL_MEDICO">
+                <ScalarProperty Name="id_historial" ColumnName="id_historial" />
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="id_empleado_veterinario" ColumnName="id_empleado_veterinario" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="fecha_atencion" ColumnName="fecha_atencion" />
+                <ScalarProperty Name="motivo_consulta" ColumnName="motivo_consulta" />
+                <ScalarProperty Name="diagnostico" ColumnName="diagnostico" />
+                <ScalarProperty Name="tratamiento_indicado" ColumnName="tratamiento_indicado" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOSPITALIZACIONs">
+            <EntityTypeMapping TypeName="VeterinariaModel.HOSPITALIZACION">
+              <MappingFragment StoreEntitySet="HOSPITALIZACION">
+                <ScalarProperty Name="id_hospitalizacion" ColumnName="id_hospitalizacion" />
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="id_empleado_responsable" ColumnName="id_empleado_responsable" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="id_cama_asignada" ColumnName="id_cama_asignada" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="fecha_salida_estimada" ColumnName="fecha_salida_estimada" />
+                <ScalarProperty Name="fecha_salida_real" ColumnName="fecha_salida_real" />
+                <ScalarProperty Name="motivo_ingreso" ColumnName="motivo_ingreso" />
+                <ScalarProperty Name="estado_actual" ColumnName="estado_actual" />
+                <ScalarProperty Name="id_historial_medico_ingreso" ColumnName="id_historial_medico_ingreso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MASCOTAs">
+            <EntityTypeMapping TypeName="VeterinariaModel.MASCOTA">
+              <MappingFragment StoreEntitySet="MASCOTA">
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="peso_kg" ColumnName="peso_kg" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="id_raza" ColumnName="id_raza" />
+                <ScalarProperty Name="id_dueno" ColumnName="id_dueno" />
+                <ScalarProperty Name="microchip_id" ColumnName="microchip_id" />
+                <ScalarProperty Name="notas_adicionales" ColumnName="notas_adicionales" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="activa" ColumnName="activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="METODO_PAGO">
+            <EntityTypeMapping TypeName="VeterinariaModel.METODO_PAGO">
+              <MappingFragment StoreEntitySet="METODO_PAGO">
+                <ScalarProperty Name="id_metodo_pago" ColumnName="id_metodo_pago" />
+                <ScalarProperty Name="nombre_metodo" ColumnName="nombre_metodo" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_COMPRA">
+            <EntityTypeMapping TypeName="VeterinariaModel.ORDEN_COMPRA">
+              <MappingFragment StoreEntitySet="ORDEN_COMPRA">
+                <ScalarProperty Name="id_orden_compra" ColumnName="id_orden_compra" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="id_empleado_solicita" ColumnName="id_empleado_solicita" />
+                <ScalarProperty Name="id_sede_destino" ColumnName="id_sede_destino" />
+                <ScalarProperty Name="fecha_orden" ColumnName="fecha_orden" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOes">
+            <EntityTypeMapping TypeName="VeterinariaModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_tipo_producto" ColumnName="id_tipo_producto" />
+                <ScalarProperty Name="codigo_barras" ColumnName="codigo_barras" />
+                <ScalarProperty Name="precio_venta_sugerido" ColumnName="precio_venta_sugerido" />
+                <ScalarProperty Name="requiere_receta" ColumnName="requiere_receta" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDORs">
+            <EntityTypeMapping TypeName="VeterinariaModel.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="nombre_empresa" ColumnName="nombre_empresa" />
+                <ScalarProperty Name="nit_ruc" ColumnName="nit_ruc" />
+                <ScalarProperty Name="contacto_nombre" ColumnName="contacto_nombre" />
+                <ScalarProperty Name="contacto_telefono" ColumnName="contacto_telefono" />
+                <ScalarProperty Name="contacto_email" ColumnName="contacto_email" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RAZA_MASCOTA">
+            <EntityTypeMapping TypeName="VeterinariaModel.RAZA_MASCOTA">
+              <MappingFragment StoreEntitySet="RAZA_MASCOTA">
+                <ScalarProperty Name="id_raza" ColumnName="id_raza" />
+                <ScalarProperty Name="nombre_raza" ColumnName="nombre_raza" />
+                <ScalarProperty Name="id_especie" ColumnName="id_especie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLs">
+            <EntityTypeMapping TypeName="VeterinariaModel.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEDEs">
+            <EntityTypeMapping TypeName="VeterinariaModel.SEDE">
+              <MappingFragment StoreEntitySet="SEDE">
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="nombre_sede" ColumnName="nombre_sede" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="id_empleado_encargado" ColumnName="id_empleado_encargado" />
+                <ScalarProperty Name="activa" ColumnName="activa" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIO_ADICIONAL_PRESTADO">
+            <EntityTypeMapping TypeName="VeterinariaModel.SERVICIO_ADICIONAL_PRESTADO">
+              <MappingFragment StoreEntitySet="SERVICIO_ADICIONAL_PRESTADO">
+                <ScalarProperty Name="id_servicio_prestado" ColumnName="id_servicio_prestado" />
+                <ScalarProperty Name="id_mascota" ColumnName="id_mascota" />
+                <ScalarProperty Name="id_tipo_servicio_adicional" ColumnName="id_tipo_servicio_adicional" />
+                <ScalarProperty Name="id_empleado_realiza" ColumnName="id_empleado_realiza" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="fecha_servicio" ColumnName="fecha_servicio" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="costo_final" ColumnName="costo_final" />
+                <ScalarProperty Name="id_historial_medico_asociado" ColumnName="id_historial_medico_asociado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STOCK_PRODUCTO_SEDE">
+            <EntityTypeMapping TypeName="VeterinariaModel.STOCK_PRODUCTO_SEDE">
+              <MappingFragment StoreEntitySet="STOCK_PRODUCTO_SEDE">
+                <ScalarProperty Name="id_stock_producto_sede" ColumnName="id_stock_producto_sede" />
+                <ScalarProperty Name="id_sede" ColumnName="id_sede" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="cantidad_disponible" ColumnName="cantidad_disponible" />
+                <ScalarProperty Name="stock_minimo" ColumnName="stock_minimo" />
+                <ScalarProperty Name="lote" ColumnName="lote" />
+                <ScalarProperty Name="fecha_vencimiento" ColumnName="fecha_vencimiento" />
+                <ScalarProperty Name="ultima_actualizacion" ColumnName="ultima_actualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VeterinariaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CIRUGIA">
+            <EntityTypeMapping TypeName="VeterinariaModel.TIPO_CIRUGIA">
+              <MappingFragment StoreEntitySet="TIPO_CIRUGIA">
+                <ScalarProperty Name="id_tipo_cirugia" ColumnName="id_tipo_cirugia" />
+                <ScalarProperty Name="nombre_tipo_cirugia" ColumnName="nombre_tipo_cirugia" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CITA">
+            <EntityTypeMapping TypeName="VeterinariaModel.TIPO_CITA">
+              <MappingFragment StoreEntitySet="TIPO_CITA">
+                <ScalarProperty Name="id_tipo_cita" ColumnName="id_tipo_cita" />
+                <ScalarProperty Name="nombre_tipo_cita" ColumnName="nombre_tipo_cita" />
+                <ScalarProperty Name="duracion_estimada_minutos" ColumnName="duracion_estimada_minutos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PRODUCTO">
+            <EntityTypeMapping TypeName="VeterinariaModel.TIPO_PRODUCTO">
+              <MappingFragment StoreEntitySet="TIPO_PRODUCTO">
+                <ScalarProperty Name="id_tipo_producto" ColumnName="id_tipo_producto" />
+                <ScalarProperty Name="nombre_tipo" ColumnName="nombre_tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_SERVICIO_ADICIONAL">
+            <EntityTypeMapping TypeName="VeterinariaModel.TIPO_SERVICIO_ADICIONAL">
+              <MappingFragment StoreEntitySet="TIPO_SERVICIO_ADICIONAL">
+                <ScalarProperty Name="id_tipo_servicio_adicional" ColumnName="id_tipo_servicio_adicional" />
+                <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio_base" ColumnName="precio_base" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRATAMIENTO_APLICADO">
+            <EntityTypeMapping TypeName="VeterinariaModel.TRATAMIENTO_APLICADO">
+              <MappingFragment StoreEntitySet="TRATAMIENTO_APLICADO">
+                <ScalarProperty Name="id_tratamiento_aplicado" ColumnName="id_tratamiento_aplicado" />
+                <ScalarProperty Name="id_historial_medico" ColumnName="id_historial_medico" />
+                <ScalarProperty Name="id_hospitalizacion" ColumnName="id_hospitalizacion" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="id_empleado_aplica" ColumnName="id_empleado_aplica" />
+                <ScalarProperty Name="fecha_hora_aplicacion" ColumnName="fecha_hora_aplicacion" />
+                <ScalarProperty Name="cantidad_aplicada" ColumnName="cantidad_aplicada" />
+                <ScalarProperty Name="unidad_medida" ColumnName="unidad_medida" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="costo_tratamiento" ColumnName="costo_tratamiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOs">
+            <EntityTypeMapping TypeName="VeterinariaModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="clave_hash" ColumnName="clave_hash" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="ultimo_login" ColumnName="ultimo_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_ROL">
+            <EntityTypeMapping TypeName="VeterinariaModel.USUARIO_ROL">
+              <MappingFragment StoreEntitySet="USUARIO_ROL">
+                <ScalarProperty Name="id_usuario_rol" ColumnName="id_usuario_rol" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
