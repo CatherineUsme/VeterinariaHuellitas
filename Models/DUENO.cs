@@ -9,6 +9,7 @@
 
 namespace VeterinariaHuellitas.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -30,9 +31,12 @@ namespace VeterinariaHuellitas.Models
         public string direccion { get; set; }
         public Nullable<System.DateTime> fecha_registro { get; set; }
         public Nullable<bool> activo { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA> FACTURAs { get; set; }
+        
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MASCOTA> MASCOTAs { get; set; }
     }
