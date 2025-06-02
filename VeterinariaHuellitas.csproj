@@ -186,12 +186,24 @@
     <Compile Include="Clases\clsEspecieMascota.cs" />
     <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
+    <Compile Include="Clases\clsSede.cs" />
+    <Compile Include="Clases\clsTipoCirugia.cs" />
+    <Compile Include="Clases\clsTipoCita.cs" />
+    <Compile Include="Clases\clsTipoProducto.cs" />
+    <Compile Include="Clases\clsTipoServicioAdicional.cs" />
+    <Compile Include="Clases\clsUsuario.cs" />
+    <Compile Include="Clases\clsUsuarioRol.cs" />
     <Compile Include="Controllers\DueñosController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
-    <Compile Include="Clases\clsSede.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MascotasController.cs" />
     <Compile Include="Controllers\RazasMascotaController.cs" />
+    <Compile Include="Controllers\TipoCirugiaController.cs" />
+    <Compile Include="Controllers\TipoCitaController.cs" />
+    <Compile Include="Controllers\TipoProductoController.cs" />
+    <Compile Include="Controllers\TipoServicioAdicionalController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioRolController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -401,9 +413,6 @@
     <Content Include="Paginas\Estilos\bootstrap.css.map" />
     <Content Include="Paginas\Estilos\bootstrap.min.css.map" />
     <Content Include="Paginas\Estilos\webfonts\fa-brands-400.eot" />
-    <Content Include="Paginas\Estilos\webfonts\fa-brands-400.ttf" />
-    <Content Include="Paginas\Estilos\webfonts\fa-brands-400.woff" />
-    <Content Include="Paginas\Estilos\webfonts\fa-brands-400.woff2" />
     <Content Include="Paginas\Estilos\webfonts\fa-regular-400.eot" />
     <Content Include="Paginas\Estilos\webfonts\fa-regular-400.ttf" />
     <Content Include="Paginas\Estilos\webfonts\fa-regular-400.woff" />
@@ -594,7 +603,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49765</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44302/</IISUrl>
+          <IISUrl>http://localhost:44302/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:44302/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

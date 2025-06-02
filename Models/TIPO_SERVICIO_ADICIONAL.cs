@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class TIPO_SERVICIO_ADICIONAL
     {
@@ -27,6 +28,7 @@ namespace VeterinariaHuellitas.Models
         public Nullable<bool> activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<SERVICIO_ADICIONAL_PRESTADO> SERVICIO_ADICIONAL_PRESTADO { get; set; }
     }
 }

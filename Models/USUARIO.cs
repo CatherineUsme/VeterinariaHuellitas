@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class USUARIO
     {
@@ -23,7 +24,9 @@ namespace VeterinariaHuellitas.Models
         public int id_usuario { get; set; }
         public int id_empleado { get; set; }
         public string username { get; set; }
+        [JsonIgnore]
         public string clave_hash { get; set; }
+        [JsonIgnore]
         public string salt { get; set; }
         public Nullable<bool> activo { get; set; }
         public Nullable<System.DateTime> ultimo_login { get; set; }
