@@ -165,11 +165,13 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Clases\clsDueno.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
+    <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
     <Compile Include="Controllers\DueñosController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
     <Compile Include="Clases\clsSede.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MascotasController.cs" />
     <Compile Include="Controllers\RazasMascotaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
