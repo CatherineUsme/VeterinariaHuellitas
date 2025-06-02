@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class TIPO_CIRUGIA
     {
@@ -25,6 +26,7 @@ namespace VeterinariaHuellitas.Models
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<CIRUGIA> CIRUGIAs { get; set; }
     }
 }
