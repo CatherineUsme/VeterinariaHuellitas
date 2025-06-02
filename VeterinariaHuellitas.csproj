@@ -172,6 +172,8 @@
     <Compile Include="Clases\clsTipoCita.cs" />
     <Compile Include="Clases\clsTipoProducto.cs" />
     <Compile Include="Clases\clsTipoServicioAdicional.cs" />
+    <Compile Include="Clases\clsUsuario.cs" />
+    <Compile Include="Clases\clsUsuarioRol.cs" />
     <Compile Include="Controllers\DueñosController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="Controllers\TipoCitaController.cs" />
     <Compile Include="Controllers\TipoProductoController.cs" />
     <Compile Include="Controllers\TipoServicioAdicionalController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioRolController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

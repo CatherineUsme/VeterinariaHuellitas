@@ -7,11 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace VeterinariaHuellitas.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class USUARIO_ROL
     {
         public int id_usuario_rol { get; set; }
@@ -19,7 +20,9 @@ namespace VeterinariaHuellitas.Models
         public int id_rol { get; set; }
         public Nullable<System.DateTime> fecha_asignacion { get; set; }
     
+        [JsonIgnore]
         public virtual ROL ROL { get; set; }
+        [JsonIgnore]
         public virtual USUARIO USUARIO { get; set; }
     }
 }
