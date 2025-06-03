@@ -5,6 +5,8 @@ using VeterinariaHuellitas.Models;
 
 namespace VeterinariaHuellitas.Controllers
 {
+
+    [AuthorizeRoles("Administrador")]
     public class UsuarioController : ApiController
     {
         public List<USUARIO> Get()
@@ -18,6 +20,7 @@ namespace VeterinariaHuellitas.Controllers
             clsUsuario usuario = new clsUsuario();
             return usuario.ConsultarXId(id);
         }
+
 
         public string Post([FromBody] USUARIO usuario)
         {

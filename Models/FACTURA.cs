@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class FACTURA
     {
@@ -34,12 +35,17 @@ namespace VeterinariaHuellitas.Models
         public string estado { get; set; }
         public Nullable<System.DateTime> fecha_pago { get; set; }
         public string observaciones { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
+        [JsonIgnore]
         public virtual DUENO DUENO { get; set; }
+        [JsonIgnore]
         public virtual EMPLEADO EMPLEADO { get; set; }
+        [JsonIgnore]
         public virtual METODO_PAGO METODO_PAGO { get; set; }
+        [JsonIgnore]
         public virtual SEDE SEDE { get; set; }
     }
 }

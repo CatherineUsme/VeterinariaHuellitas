@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class DETALLE_FACTURA
     {
@@ -23,7 +24,8 @@ namespace VeterinariaHuellitas.Models
         public decimal precio_unitario { get; set; }
         public Nullable<decimal> descuento_item { get; set; }
         public Nullable<decimal> subtotal_item { get; set; }
-    
+
+        [JsonIgnore]
         public virtual FACTURA FACTURA { get; set; }
     }
 }
