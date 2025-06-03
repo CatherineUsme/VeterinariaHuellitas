@@ -8,6 +8,8 @@ using System.Data.Entity;
 
 namespace VeterinariaHuellitas.Clases
 {
+
+    [AuthorizeRoles("Admin")]
     public class clsUsuario
     {
         private VeterinariaEntities dbVeterinaria = new VeterinariaEntities();
