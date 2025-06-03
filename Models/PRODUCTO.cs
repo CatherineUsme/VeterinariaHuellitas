@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class PRODUCTO
     {
@@ -31,11 +32,15 @@ namespace VeterinariaHuellitas.Models
         public Nullable<bool> requiere_receta { get; set; }
         public Nullable<bool> activo { get; set; }
     
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_COMPRA> DETALLE_ORDEN_COMPRA { get; set; }
+        [JsonIgnore]
         public virtual TIPO_PRODUCTO TIPO_PRODUCTO { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STOCK_PRODUCTO_SEDE> STOCK_PRODUCTO_SEDE { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TRATAMIENTO_APLICADO> TRATAMIENTO_APLICADO { get; set; }
     }
