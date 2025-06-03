@@ -256,6 +256,10 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\StockProductoController.cs" />
+    <Compile Include="Controllers\OrdenCompraController.cs" />
+    <Compile Include="Controllers\DetalleOrdenCompraController.cs" />
+    <Compile Include="Clases\clsOrdenCompra.cs" />
+    <Compile Include="Clases\clsDetalleOrdenCompra.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -34,10 +34,7 @@ namespace VeterinariaHuellitas.Models
         public Nullable<decimal> total_factura { get; set; }
         public string estado { get; set; }
         public Nullable<System.DateTime> fecha_pago { get; set; }
-        public string observaciones { get; set; }
-
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public string observaciones { get; set; }        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FACTURA> DETALLE_FACTURA { get; set; }
         [JsonIgnore]
         public virtual DUENO DUENO { get; set; }

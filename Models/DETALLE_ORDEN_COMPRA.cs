@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class DETALLE_ORDEN_COMPRA
     {
@@ -21,7 +22,10 @@ namespace VeterinariaHuellitas.Models
         public decimal precio_unitario_compra { get; set; }
         public Nullable<decimal> subtotal { get; set; }
     
+        [JsonIgnore]
         public virtual ORDEN_COMPRA ORDEN_COMPRA { get; set; }
+
+        [JsonIgnore]
         public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

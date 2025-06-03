@@ -63,6 +63,16 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         [HttpPut]
+        [Route("pagar/{id:int}")]
+        public IHttpActionResult RegistrarPago(int id, [FromBody] int idMetodoPago)
+        {
+            var service = new clsFactura();
+            var msg = service.RegistrarPago(id, idMetodoPago);
+            if (!msg.Contains("correctamente")) return BadRequest(msg);
+            return Ok(msg);
+        }
+
+        [HttpPut]
         [Route("anular/{id:int}")]
         public IHttpActionResult Anular(int id)
         {
