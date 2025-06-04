@@ -10,6 +10,12 @@ function LlenarTablaDuenos() {
     LlenarTablaXServiciosAuth(URL, "#tblDuenos");
 }
 
+function EjecutarComando(Metodo, Function) {
+    let URL = UrlBase + "api/duenos/" + Funcion;
+    const dueno = new 
+    EjecutarComandoServicioAuth(Metodo,URL ,);
+}
+
 async function Consultar() {
     let cedula = $("#txtDocumento").val();
     let URL = UrlBase + "api/duenos/ConsultarXCedula?cedula=" + cedula;
@@ -18,8 +24,19 @@ async function Consultar() {
         $("#dvMensaje").removeClass("alert alert-success");
         $("#dvMensaje").addClass("alert alert-danger");
         $("#dvMensaje").html("El dueño no existe");
+        $("#txtNombre").val("");
+        $("#txtApellidos").val("");
+        $("#txtEmail").val("");
+        $("#txtTelefono").val("");
+        $("#txtDireccion").val("");
+        $("#txtId").val("");
+        $("#txtFechaCreacion").val("");
+        $("#chkActivo").prop("checked", dueno.activo);
     }
     else {
+        $("#dvMensaje").removeClass("alert alert-danger");
+        $("#dvMensaje").addClass("alert alert-success");
+        $("#dvMensaje").html("");
         $("#txtDocumento").val(dueno.cedula);
         $("#txtNombre").val(dueno.nombre);
         $("#txtApellidos").val(dueno.apellido);
@@ -34,7 +51,7 @@ async function Consultar() {
     
 }
 
-class dueno {
+class Dueno {
     constructor(id_dueno, nombre, apellido, cedula, email, telefono, direccion, fecha_registro, activo) {
         this.id_dueno = id_dueno;
         this.Nombre = nombre;
