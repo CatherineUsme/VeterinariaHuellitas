@@ -51,7 +51,7 @@ namespace VeterinariaHuellitas.Controllers
         public IHttpActionResult CambiarEstado(int id, [FromBody] string nuevoEstado)
         {
             var service = new clsCita();
-            var cita = service.Cons ultarXId(id);
+            var cita = service.ConsultarXId(id);
             if (cita == null) return NotFound();
             var citaUpdate = new CITA
             {

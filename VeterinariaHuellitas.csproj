@@ -273,7 +273,6 @@
     <Compile Include="Clases\clsOrdenCompra.cs" />
     <Compile Include="Clases\clsDetalleOrdenCompra.cs" />
     <Compile Include="Controllers\SedeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
