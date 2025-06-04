@@ -218,31 +218,25 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-<<<<<<< HEAD
     <Compile Include="Clases\clsCama.cs" />
     <Compile Include="Clases\clsCargoEmpleado.cs" />
     <Compile Include="Auth\AuthorizeRolesAttribute.cs" />
     <Compile Include="Auth\TokenGenerator.cs" />
     <Compile Include="Clases\AuthService.cs" />
-=======
     <Compile Include="Auth\AuthorizeRolesAttribute.cs" />
     <Compile Include="Auth\TokenGenerator.cs" />
     <Compile Include="Clases\AuthService.cs" />
     <Compile Include="Clases\clsCita.cs" />
     <Compile Include="Clases\clsCama.cs" />
     <Compile Include="Clases\clsCargoEmpleado.cs" />
->>>>>>> b1731e8303d701d3ba927fd7809d5916c362e487
     <Compile Include="Clases\clsDueno.cs" />
     <Compile Include="Clases\clsEmpleado.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
     <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\CamaController.cs" />
     <Compile Include="Controllers\CargoEmpleadoController.cs" />
-=======
     <Compile Include="Clases\clsRol.cs" />
->>>>>>> b1731e8303d701d3ba927fd7809d5916c362e487
     <Compile Include="Clases\clsSede.cs" />
     <Compile Include="Clases\clsServicioAdicional.cs" />
     <Compile Include="Clases\clsTipoCirugia.cs" />
@@ -255,27 +249,21 @@
     <Compile Include="Clases\clsDetalleFactura.cs" />
     <Compile Include="Clases\clsMetodoPago.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\DetalleFacturaController.cs" />
     <Compile Include="Controllers\MetodoPagoController.cs" />
     <Compile Include="Controllers\CamaController.cs" />
     <Compile Include="Controllers\CargoEmpleadoController.cs" />
->>>>>>> b1731e8303d701d3ba927fd7809d5916c362e487
     <Compile Include="Controllers\DueñosController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MascotasController.cs" />
     <Compile Include="Controllers\RazasMascotaController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\SedeController.cs" />
-=======
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioAdicionalController.cs" />
->>>>>>> b1731e8303d701d3ba927fd7809d5916c362e487
     <Compile Include="Controllers\TipoCirugiaController.cs" />
     <Compile Include="Controllers\TipoCitaController.cs" />
     <Compile Include="Controllers\TipoProductoController.cs" />
@@ -288,15 +276,12 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\StockProductoController.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Controllers\OrdenCompraController.cs" />
     <Compile Include="Controllers\DetalleOrdenCompraController.cs" />
     <Compile Include="Clases\clsOrdenCompra.cs" />
     <Compile Include="Clases\clsDetalleOrdenCompra.cs" />
     <Compile Include="Controllers\SedeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
->>>>>>> b1731e8303d701d3ba927fd7809d5916c362e487
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
