@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class STOCK_PRODUCTO_SEDE
     {
@@ -23,7 +24,9 @@ namespace VeterinariaHuellitas.Models
         public Nullable<System.DateTime> fecha_vencimiento { get; set; }
         public Nullable<System.DateTime> ultima_actualizacion { get; set; }
     
+        [JsonIgnore]
         public virtual PRODUCTO PRODUCTO { get; set; }
+        [JsonIgnore]
         public virtual SEDE SEDE { get; set; }
     }
 }

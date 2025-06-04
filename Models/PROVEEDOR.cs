@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class PROVEEDOR
     {
@@ -28,6 +29,7 @@ namespace VeterinariaHuellitas.Models
         public string contacto_email { get; set; }
         public Nullable<bool> activo { get; set; }
     
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN_COMPRA> ORDEN_COMPRA { get; set; }
     }
