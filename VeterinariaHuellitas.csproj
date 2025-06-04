@@ -245,7 +245,6 @@
     <Compile Include="Controllers\MascotasController.cs" />
     <Compile Include="Controllers\RazasMascotaController.cs" />
     <Compile Include="Controllers\SedeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\TipoCirugiaController.cs" />
     <Compile Include="Controllers\TipoCitaController.cs" />
     <Compile Include="Controllers\TipoProductoController.cs" />

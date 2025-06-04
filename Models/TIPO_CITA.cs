@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class TIPO_CITA
     {
@@ -25,6 +26,7 @@ namespace VeterinariaHuellitas.Models
         public Nullable<int> duracion_estimada_minutos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<CITA> CITAs { get; set; }
     }
 }
