@@ -7,11 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace VeterinariaHuellitas.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class ORDEN_COMPRA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,10 +29,17 @@ namespace VeterinariaHuellitas.Models
         public string estado { get; set; }
         public string observaciones { get; set; }
     
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN_COMPRA> DETALLE_ORDEN_COMPRA { get; set; }
+
+        [JsonIgnore]
         public virtual EMPLEADO EMPLEADO { get; set; }
+
+        [JsonIgnore]
         public virtual PROVEEDOR PROVEEDOR { get; set; }
+
+        [JsonIgnore]
         public virtual SEDE SEDE { get; set; }
     }
 }

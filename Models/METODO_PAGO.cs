@@ -11,6 +11,7 @@ namespace VeterinariaHuellitas.Models
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     
     public partial class METODO_PAGO
     {
@@ -19,11 +20,12 @@ namespace VeterinariaHuellitas.Models
         {
             this.FACTURAs = new HashSet<FACTURA>();
         }
-    
+
         public int id_metodo_pago { get; set; }
         public string nombre_metodo { get; set; }
         public Nullable<bool> activo { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA> FACTURAs { get; set; }
     }

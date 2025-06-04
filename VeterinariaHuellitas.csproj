@@ -221,23 +221,35 @@
     <Compile Include="Auth\AuthorizeRolesAttribute.cs" />
     <Compile Include="Auth\TokenGenerator.cs" />
     <Compile Include="Clases\AuthService.cs" />
+    <Compile Include="Clases\clsCita.cs" />
     <Compile Include="Clases\clsDueno.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
     <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
+    <Compile Include="Clases\clsRol.cs" />
     <Compile Include="Clases\clsSede.cs" />
+    <Compile Include="Clases\clsServicioAdicional.cs" />
     <Compile Include="Clases\clsTipoCirugia.cs" />
     <Compile Include="Clases\clsTipoCita.cs" />
     <Compile Include="Clases\clsTipoProducto.cs" />
     <Compile Include="Clases\clsTipoServicioAdicional.cs" />
     <Compile Include="Clases\clsUsuario.cs" />
     <Compile Include="Clases\clsUsuarioRol.cs" />
+    <Compile Include="Clases\clsFactura.cs" />
+    <Compile Include="Clases\clsDetalleFactura.cs" />
+    <Compile Include="Clases\clsMetodoPago.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
+    <Compile Include="Controllers\FacturaController.cs" />
+    <Compile Include="Controllers\DetalleFacturaController.cs" />
+    <Compile Include="Controllers\MetodoPagoController.cs" />
     <Compile Include="Controllers\DueñosController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MascotasController.cs" />
     <Compile Include="Controllers\RazasMascotaController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\ServicioAdicionalController.cs" />
     <Compile Include="Controllers\TipoCirugiaController.cs" />
     <Compile Include="Controllers\TipoCitaController.cs" />
     <Compile Include="Controllers\TipoProductoController.cs" />
@@ -250,6 +262,10 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\StockProductoController.cs" />
+    <Compile Include="Controllers\OrdenCompraController.cs" />
+    <Compile Include="Controllers\DetalleOrdenCompraController.cs" />
+    <Compile Include="Clases\clsOrdenCompra.cs" />
+    <Compile Include="Clases\clsDetalleOrdenCompra.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
