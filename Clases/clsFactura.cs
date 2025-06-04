@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using VeterinariaHuellitas.Models;
 
@@ -72,32 +71,93 @@ namespace VeterinariaHuellitas.Clases
                 {
                     try
                     {
-                        FACTURA facturaExistente = ConsultarXId(factura.id_factura);
+                        FACTURA facturaExistente = dbVeterinaria.FACTURAs
+                            .Include(f => f.DETALLE_FACTURA)
+                            .FirstOrDefault(f => f.id_factura == factura.id_factura);
                         if (facturaExistente == null)
                         {
                             return "Factura no encontrada.";
                         }
-
-                        if (facturaExistente.estado == "ANULADA")
+                        if (facturaExistente.estado == ESTADO_ANULADA)
                         {
                             return "No se puede modificar una factura anulada.";
                         }
+                        if (!string.IsNullOrEmpty(factura.numero_factura))
+                        {
+                            bool existeNumero = dbVeterinaria.FACTURAs.Any(f => f.numero_factura == factura.numero_factura && f.id_factura != factura.id_factura);
+                            if (existeNumero)
+                            {
+                                return "Ya existe una factura con el mismo numero.";
+                            }
+                        }
+                        if (!dbVeterinaria.DUENOes.Any(d => d.id_dueno == factura.id_dueno))
+                            return "Dueno no valido.";
+                        if (!dbVeterinaria.EMPLEADOes.Any(e => e.id_empleado == factura.id_empleado_emite))
+                            return "Empleado no valido.";
+                        if (!dbVeterinaria.SEDEs.Any(s => s.id_sede == factura.id_sede))
+                            return "Sede no valida.";
+                        if (factura.id_metodo_pago.HasValue && !dbVeterinaria.METODO_PAGO.Any(m => m.id_metodo_pago == factura.id_metodo_pago))
+                            return "Metodo de pago no valido.";
 
-                        factura.fecha_pago = DateTime.Now;
-                        factura.subtotal_factura = factura.DETALLE_FACTURA.Sum(d => d.subtotal_item);
-                        factura.impuestos_factura = factura.subtotal_factura * 0.19m;
-                        factura.total_factura = factura.subtotal_factura + factura.impuestos_factura - (factura.descuento_factura ?? 0);
+                        facturaExistente.id_dueno = factura.id_dueno;
+                        facturaExistente.id_empleado_emite = factura.id_empleado_emite;
+                        facturaExistente.id_sede = factura.id_sede;
+                        facturaExistente.id_metodo_pago = factura.id_metodo_pago;
+                        facturaExistente.fecha_emision = factura.fecha_emision;
+                        facturaExistente.numero_factura = factura.numero_factura;
+                        facturaExistente.descuento_factura = factura.descuento_factura;
+                        facturaExistente.estado = factura.estado;
+                        facturaExistente.fecha_pago = factura.fecha_pago;
+                        facturaExistente.observaciones = factura.observaciones;
 
-                        dbVeterinaria.FACTURAs.AddOrUpdate(factura);
+                        var detallesNuevos = factura.DETALLE_FACTURA ?? new List<DETALLE_FACTURA>();
+                        var detallesExistentes = facturaExistente.DETALLE_FACTURA.ToList();
+
+                        foreach (var detalleExistente in detallesExistentes)
+                        {
+                            if (!detallesNuevos.Any(d => d.id_detalle_factura == detalleExistente.id_detalle_factura))
+                            {
+                                dbVeterinaria.DETALLE_FACTURA.Remove(detalleExistente);
+                            }
+                        }
+
+                        foreach (var detalleNuevo in detallesNuevos)
+                        {
+                            if (detalleNuevo.tipo_item == "Producto")
+                            {
+                                if (!dbVeterinaria.PRODUCTOes.Any(p => p.id_producto == detalleNuevo.id_item_referencia))
+                                    return "Producto no valido en detalle.";
+                            }
+                            var detalleExistente = detallesExistentes.FirstOrDefault(d => d.id_detalle_factura == detalleNuevo.id_detalle_factura);
+                            if (detalleExistente != null)
+                            {
+                                detalleExistente.tipo_item = detalleNuevo.tipo_item;
+                                detalleExistente.id_item_referencia = detalleNuevo.id_item_referencia;
+                                detalleExistente.descripcion_item = detalleNuevo.descripcion_item;
+                                detalleExistente.cantidad = detalleNuevo.cantidad;
+                                detalleExistente.precio_unitario = detalleNuevo.precio_unitario;
+                                detalleExistente.descuento_item = detalleNuevo.descuento_item;
+                                detalleExistente.subtotal_item = detalleNuevo.subtotal_item;
+                            }
+                            else
+                            {
+                                detalleNuevo.id_factura = facturaExistente.id_factura;
+                                dbVeterinaria.DETALLE_FACTURA.Add(detalleNuevo);
+                            }
+                        }
+
+                        facturaExistente.subtotal_factura = facturaExistente.DETALLE_FACTURA.Sum(d => d.subtotal_item ?? 0);
+                        facturaExistente.impuestos_factura = facturaExistente.subtotal_factura * 0.19m;
+                        facturaExistente.total_factura = facturaExistente.subtotal_factura + facturaExistente.impuestos_factura - (facturaExistente.descuento_factura ?? 0);
+
                         dbVeterinaria.SaveChanges();
-
                         transaction.Commit();
                         return "Factura actualizada correctamente.";
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw new Exception("Error en la transacción: " + ex.Message);
+                        throw new Exception("Error en la transaccion: " + ex.Message);
                     }
                 }
             }
@@ -124,7 +184,6 @@ namespace VeterinariaHuellitas.Clases
                         return "No se puede anular la factura en el estado actual.";
                     }
 
-                    // Revertir inventario si la factura tiene productos
                     var detalles = dbVeterinaria.DETALLE_FACTURA
                         .Where(d => d.id_factura == id)
                         .ToList();
@@ -176,7 +235,6 @@ namespace VeterinariaHuellitas.Clases
                         return "No se puede registrar el pago en el estado actual.";
                     }
 
-                    // Verificar que el método de pago existe
                     var metodoPago = dbVeterinaria.METODO_PAGO.Find(idMetodoPago);
                     if (metodoPago == null)
                     {

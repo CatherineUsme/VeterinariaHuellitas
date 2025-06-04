@@ -218,6 +218,7 @@
     <Compile Include="Auth\AuthorizeRolesAttribute.cs" />
     <Compile Include="Auth\TokenGenerator.cs" />
     <Compile Include="Clases\AuthService.cs" />
+    <Compile Include="Clases\clsCita.cs" />
     <Compile Include="Clases\clsDueno.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
     <Compile Include="Clases\clsMascota.cs" />
@@ -228,12 +229,14 @@
     <Compile Include="Clases\clsTipoCirugia.cs" />
     <Compile Include="Clases\clsTipoCita.cs" />
     <Compile Include="Clases\clsTipoProducto.cs" />
-    <Compile Include="Clases\clsTipoServicioAdicional.cs" />    <Compile Include="Clases\clsUsuario.cs" />
+    <Compile Include="Clases\clsTipoServicioAdicional.cs" />
+    <Compile Include="Clases\clsUsuario.cs" />
     <Compile Include="Clases\clsUsuarioRol.cs" />
     <Compile Include="Clases\clsFactura.cs" />
     <Compile Include="Clases\clsDetalleFactura.cs" />
     <Compile Include="Clases\clsMetodoPago.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\DetalleFacturaController.cs" />
     <Compile Include="Controllers\MetodoPagoController.cs" />
