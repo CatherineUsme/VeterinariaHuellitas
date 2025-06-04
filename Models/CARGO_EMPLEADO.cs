@@ -9,6 +9,7 @@
 
 namespace VeterinariaHuellitas.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -25,7 +26,8 @@ namespace VeterinariaHuellitas.Models
         public string descripcion { get; set; }
         public Nullable<decimal> salario_base { get; set; }
         public Nullable<bool> activo { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLEADO> EMPLEADOes { get; set; }
     }

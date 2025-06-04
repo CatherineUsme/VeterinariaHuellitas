@@ -9,6 +9,7 @@
 
 namespace VeterinariaHuellitas.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -25,8 +26,10 @@ namespace VeterinariaHuellitas.Models
         public string numero_identificador { get; set; }
         public string tipo_cama { get; set; }
         public string estado { get; set; }
-    
+
+        [JsonIgnore]
         public virtual SEDE SEDE { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOSPITALIZACION> HOSPITALIZACIONs { get; set; }
     }
