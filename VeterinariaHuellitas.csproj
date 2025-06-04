@@ -222,7 +222,10 @@
     <Compile Include="Auth\TokenGenerator.cs" />
     <Compile Include="Clases\AuthService.cs" />
     <Compile Include="Clases\clsCita.cs" />
+    <Compile Include="Clases\clsCama.cs" />
+    <Compile Include="Clases\clsCargoEmpleado.cs" />
     <Compile Include="Clases\clsDueno.cs" />
+    <Compile Include="Clases\clsEmpleado.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
     <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
@@ -243,7 +246,10 @@
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\DetalleFacturaController.cs" />
     <Compile Include="Controllers\MetodoPagoController.cs" />
+    <Compile Include="Controllers\CamaController.cs" />
+    <Compile Include="Controllers\CargoEmpleadoController.cs" />
     <Compile Include="Controllers\DueñosController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EspeciesMascotaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MascotasController.cs" />
@@ -266,6 +272,8 @@
     <Compile Include="Controllers\DetalleOrdenCompraController.cs" />
     <Compile Include="Clases\clsOrdenCompra.cs" />
     <Compile Include="Clases\clsDetalleOrdenCompra.cs" />
+    <Compile Include="Controllers\SedeController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
