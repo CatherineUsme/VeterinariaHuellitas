@@ -10,6 +10,7 @@ using VeterinariaHuellitas.Models;
 namespace VeterinariaHuellitas.Controllers
 {
     [RoutePrefix("api/Sede")]
+    //[AuthorizeRoles("Administrador")]
     public class SedeController : ApiController
     {
         [HttpPost]

@@ -5,7 +5,7 @@ using VeterinariaHuellitas.Models;
 namespace VeterinariaHuellitas.Controllers
 {
     [RoutePrefix("api/metodo-pago")]
-    [AuthorizeRoles("Administrador")]
+    //[AuthorizeRoles("Administrador")]
     public class MetodoPagoController : ApiController
     {
         [HttpGet]

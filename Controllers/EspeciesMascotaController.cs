@@ -15,7 +15,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarTodos")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public List<ESPECIE_MASCOTA> ConsultarTodos()
         {
             clsEspecieMascota especieMascota = new clsEspecieMascota();
@@ -25,7 +25,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarXId")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public ESPECIE_MASCOTA ConsultarXId(int id_especie)
         {
             clsEspecieMascota especieMascota = new clsEspecieMascota();
@@ -35,7 +35,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarXNombre")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public ESPECIE_MASCOTA ConsultarXNombre(string nombre_especie)
         {
             clsEspecieMascota especieMascota = new clsEspecieMascota();
@@ -45,7 +45,7 @@ namespace VeterinariaHuellitas.Controllers
         // Insertar: solo Administrador
         [HttpPost]
         [Route("Insertar")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Insertar([FromBody]ESPECIE_MASCOTA especieMascota)
         {
             clsEspecieMascota especie = new clsEspecieMascota();
@@ -56,7 +56,7 @@ namespace VeterinariaHuellitas.Controllers
         // Actualizar: solo Administrador
         [HttpPut]
         [Route("Actualizar")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Actualizar([FromBody] ESPECIE_MASCOTA especieMascota)
         {
             clsEspecieMascota especie = new clsEspecieMascota();
@@ -67,7 +67,7 @@ namespace VeterinariaHuellitas.Controllers
         // Eliminar: solo Administrador
         [HttpDelete]
         [Route("EliminarXNombre")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string EliminarXNombre(string nombre_especie)
         {
             clsEspecieMascota especie = new clsEspecieMascota();

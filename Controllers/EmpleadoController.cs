@@ -12,6 +12,7 @@ namespace VeterinariaHuellitas.Controllers
     [RoutePrefix("api/Empleado")]
     public class EmpleadoController : ApiController
     {
+
         [HttpPost]
         [Route("Insertar")]
         public string Insertar([FromBody] EMPLEADO empleado)
