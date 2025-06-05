@@ -10,7 +10,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Recepcionista, Veterinario
         [HttpGet]
         [Route("")]
-        [AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
+        //[AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
         public IHttpActionResult GetAll()
         {
             var service = new clsServicioAdicional();
@@ -20,7 +20,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Recepcionista, Veterinario
         [HttpGet]
         [Route("{id:int}")]
-        [AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
+        //[AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
         public IHttpActionResult GetById(int id)
         {
             var service = new clsServicioAdicional();
@@ -32,7 +32,7 @@ namespace VeterinariaHuellitas.Controllers
         // Crear: Administrador, Recepcionista
         [HttpPost]
         [Route("")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Create([FromBody] SERVICIO_ADICIONAL_PRESTADO servicio)
         {
             var service = new clsServicioAdicional { servicio = servicio };
@@ -44,7 +44,7 @@ namespace VeterinariaHuellitas.Controllers
         // Editar: Administrador, Recepcionista
         [HttpPut]
         [Route("")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Update([FromBody] SERVICIO_ADICIONAL_PRESTADO servicio)
         {
             var service = new clsServicioAdicional { servicio = servicio };
@@ -56,7 +56,7 @@ namespace VeterinariaHuellitas.Controllers
         // Eliminar: Administrador, Recepcionista
         [HttpDelete]
         [Route("{id:int}")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Delete(int id)
         {
             var service = new clsServicioAdicional();

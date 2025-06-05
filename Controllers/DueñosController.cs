@@ -17,7 +17,7 @@ namespace VeterinariaHuellitas.Controllers
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista", "Farmaceuta")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista", "Farmaceuta")]
         public List<DUENO> ConsultarTodos()
         {
             clsDueno dueno = new clsDueno();
@@ -27,7 +27,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista, Farmaceuta
         [HttpGet]
         [Route("ConsultarXCedula")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista", "Farmaceuta")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista", "Farmaceuta")]
         public DUENO ConsultarXCedula(string cedula)
         {
             clsDueno dueno = new clsDueno();
@@ -37,7 +37,7 @@ namespace VeterinariaHuellitas.Controllers
         // Insertar: Administrador, Recepcionista
         [HttpPost]
         [Route("Insertar")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public string Insertar([FromBody] DUENO dueno)
         {
             clsDueno duen = new clsDueno();
@@ -48,7 +48,7 @@ namespace VeterinariaHuellitas.Controllers
         // Editar: Administrador, Veterinario, Recepcionista
         [HttpPut]
         [Route("Actualizar")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public string Actualizar([FromBody] DUENO dueno)
         {
             clsDueno duen = new clsDueno();
@@ -59,7 +59,7 @@ namespace VeterinariaHuellitas.Controllers
         // Inactivar: Administrador, Recepcionista
         [HttpPut]
         [Route("Inactivar")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public string Inactivar(string cedula)
         {
             clsDueno duen = new clsDueno();
@@ -69,7 +69,7 @@ namespace VeterinariaHuellitas.Controllers
         // Activar: Administrador, Recepcionista
         [HttpPut]
         [Route("Activar")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public string Activar(string cedula)
         {
             clsDueno duen = new clsDueno();
@@ -79,7 +79,7 @@ namespace VeterinariaHuellitas.Controllers
         // Eliminar: Administrador, Recepcionista
         [HttpDelete]
         [Route("EliminarXCedula")]
-        [AuthorizeRoles("Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Recepcionista")]
         public string EliminarXCedula(string cedula)
         {
             clsDueno duen = new clsDueno();

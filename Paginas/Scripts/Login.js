@@ -1,5 +1,5 @@
 ﻿async function Ingresar() {
-    let BaseURL = "http://joseitm20251.runasp.net";
+    let BaseURL = "http://localhost:50000";
     let URL = BaseURL + "/api/auth/login";
     const login = {
         Username: $("#txtUsuario").val(),
@@ -19,8 +19,8 @@
             document.cookie = "token=" + data.token + ";path=/";
             $("#dvMensaje").removeClass("alert alert-danger").addClass("alert alert-success");
             $("#dvMensaje").html("Login exitoso. Redirigiendo...");
-            // Redirige a la página principal
-            setTimeout(() => window.location.href = "Home.html", 1000);
+            // Redirige inmediatamente a la página principal
+            window.location.href = "Home.html";
         } else if (response.status === 401) {
             $("#dvMensaje").removeClass("alert alert-success").addClass("alert alert-danger");
             $("#dvMensaje").html("Usuario o clave incorrectos.");
@@ -34,6 +34,7 @@
     }
 }
 
+// Clase auxiliar (opcional, no usada en el envío actual)
 class Login {
     constructor(Usuario, Clave) {
         this.Usuario = Usuario;

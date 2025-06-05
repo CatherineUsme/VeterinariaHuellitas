@@ -15,7 +15,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarTodos")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public List<RAZA_MASCOTA> ConsultarTodos()
         {
             clsRazaMascota razaMascota = new clsRazaMascota();
@@ -25,7 +25,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarXEspecie")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public List<RAZA_MASCOTA> ConsultarXEspecie(int id_especie)
         {
             clsRazaMascota razaMascota = new clsRazaMascota();
@@ -35,7 +35,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarXId")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public RAZA_MASCOTA ConsultarXId(int id_raza)
         {
             clsRazaMascota razaMascota = new clsRazaMascota();
@@ -45,7 +45,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ConsultarXNombre")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public RAZA_MASCOTA ConsultarXNombre(string nombre_raza)
         {
             clsRazaMascota razaMascota = new clsRazaMascota();
@@ -55,7 +55,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("ListarRazasXEspecie")]
-        [AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
         public IQueryable ListarRazasXEspecie()
         {
             clsRazaMascota razaMascota = new clsRazaMascota();
@@ -65,7 +65,7 @@ namespace VeterinariaHuellitas.Controllers
         // Insertar: solo Administrador
         [HttpPost]
         [Route("Insertar")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Insertar([FromBody] RAZA_MASCOTA razaMascota)
         {
             clsRazaMascota raza = new clsRazaMascota();
@@ -76,7 +76,7 @@ namespace VeterinariaHuellitas.Controllers
         // Actualizar: solo Administrador
         [HttpPut]
         [Route("Actualizar")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Actualizar([FromBody] RAZA_MASCOTA razaMascota)
         {
             clsRazaMascota raza = new clsRazaMascota();
@@ -87,7 +87,7 @@ namespace VeterinariaHuellitas.Controllers
         // Eliminar: solo Administrador
         [HttpDelete]
         [Route("EliminarXNombre")]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string EliminarXNombre(string nombre_raza)
         {
             clsRazaMascota raza = new clsRazaMascota();

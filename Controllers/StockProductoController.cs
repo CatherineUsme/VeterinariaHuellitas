@@ -9,7 +9,7 @@ namespace VeterinariaHuellitas.Controllers
     {
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public List<STOCK_PRODUCTO_SEDE> Get()
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -18,7 +18,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public STOCK_PRODUCTO_SEDE Get(int id)
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -28,7 +28,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("api/StockProducto/PorProducto/{idProducto}")]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public List<STOCK_PRODUCTO_SEDE> PorProducto(int idProducto)
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -38,7 +38,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
         [Route("api/StockProducto/PorSede/{idSede}")]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public List<STOCK_PRODUCTO_SEDE> PorSede(int idSede)
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -47,7 +47,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Gestionar: Farmaceuta, Administrador
         [HttpPost]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Post([FromBody] STOCK_PRODUCTO_SEDE stock)
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -57,7 +57,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Gestionar: Farmaceuta, Administrador
         [HttpPut]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Put([FromBody] STOCK_PRODUCTO_SEDE stock)
         {
             clsStockProducto servicio = new clsStockProducto();
@@ -67,7 +67,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Gestionar: Farmaceuta, Administrador
         [HttpDelete]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Delete(int id)
         {
             clsStockProducto servicio = new clsStockProducto();

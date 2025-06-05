@@ -7,8 +7,8 @@ using VeterinariaHuellitas.Models;
 
 namespace VeterinariaHuellitas.Clases
 {
-	public class clsDueno
-	{
+    public class clsDueno
+    {
         private VeterinariaEntities dbVeterinaria = new VeterinariaEntities();
         public DUENO dueno { get; set; }
 
@@ -21,6 +21,8 @@ namespace VeterinariaHuellitas.Clases
                 {
                     return "El dueño ya está registrado en la base de datos.";
                 }
+                dueno.fecha_registro = DateTime.Now; // Asigna la fecha del sistema
+                dueno.activo = true; // Activo por defecto
                 dbVeterinaria.DUENOes.Add(dueno);
                 dbVeterinaria.SaveChanges();
                 return "Dueño insertado correctamente.";
@@ -38,6 +40,8 @@ namespace VeterinariaHuellitas.Clases
                 DUENO duen = ConsultarXCedula(dueno.cedula);
                 if (duen != null)
                 {
+                    // Mantener la fecha de registro original
+                    dueno.fecha_registro = duen.fecha_registro;
                     dbVeterinaria.DUENOes.AddOrUpdate(dueno);
                     dbVeterinaria.SaveChanges();
                     return "Dueño actualizado correctamente.";
@@ -55,7 +59,6 @@ namespace VeterinariaHuellitas.Clases
 
         public DUENO ConsultarXCedula(string cedula)
         {
-
             return dbVeterinaria.DUENOes.FirstOrDefault(e => e.cedula == cedula);
         }
 
@@ -69,7 +72,6 @@ namespace VeterinariaHuellitas.Clases
         {
             try
             {
-
                 DUENO duen = ConsultarXCedula(cedula);
                 if (duen == null)
                 {

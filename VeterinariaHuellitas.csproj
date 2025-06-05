@@ -79,6 +79,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=8.12.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Tokens.8.12.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.Bson.1.0.3\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
@@ -103,9 +106,6 @@
     <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
@@ -123,6 +123,9 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Cors, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Cors.5.3.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -134,6 +137,12 @@
     <Reference Include="System.Web.Http, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.3.0\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+=======
+    <Reference Include="System.Web.Http.Cors, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Cors.5.3.0\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+>>>>>>> 2a4a50d87803cac65a4cc17307bd45ad7afc91d0
     <Reference Include="System.Web.Http.WebHost, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.3.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
@@ -162,9 +171,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -412,7 +418,13 @@
       <DependentUpon>DBVeterinaria.edmx</DependentUpon>
       <LastGenOutput>DBVeterinaria.cs</LastGenOutput>
     </Content>
-    <Content Include="Paginas\Duenos.html" />
+    <Content Include="Paginas\Cama.html" />
+    <Content Include="Paginas\CargoEmpleado.html" />
+    <Content Include="Paginas\Cita.html" />
+    <Content Include="Paginas\DetalleOrdenCompra.html" />
+    <Content Include="Paginas\Dueno.html" />
+    <Content Include="Paginas\Empleado.html" />
+    <Content Include="Paginas\Especie.html" />
     <Content Include="Paginas\Estilos\adminlte.css" />
     <Content Include="Paginas\Estilos\adminlte.min.css" />
     <Content Include="Paginas\Estilos\all.min.css" />
@@ -448,20 +460,46 @@
     <Content Include="Paginas\Estilos\webfonts\fa-brands-400.svg" />
     <Content Include="Paginas\Estilos\webfonts\fa-regular-400.svg" />
     <Content Include="Paginas\Estilos\webfonts\fa-solid-900.svg" />
+    <Content Include="Paginas\Home.html" />
     <Content Include="Paginas\Login.html" />
-    <Content Include="Paginas\Menu.html" />
-    <Content Include="Paginas\MenuLateral.html" />
-    <Content Include="Paginas\Pagina1.html" />
-    <Content Include="Paginas\Pagina2.html" />
-    <Content Include="Paginas\PaginaBase.html" />
+    <Content Include="Paginas\Mascota.html" />
+    <Content Include="Paginas\MetodoPago.html" />
+    <Content Include="Paginas\OrdenCompra.html" />
+    <Content Include="Paginas\Producto.html" />
+    <Content Include="Paginas\Proveedor.html" />
+    <Content Include="Paginas\Raza.html" />
+    <Content Include="Paginas\Scripts\Cama.js" />
+    <Content Include="Paginas\Scripts\CargoEmpleado.js" />
+    <Content Include="Paginas\Scripts\Cita.js" />
     <Content Include="Paginas\Scripts\Comunes\Comunes.js" />
     <Content Include="Paginas\Scripts\Comunes\CRUD.js" />
+    <Content Include="Paginas\Scripts\DetalleOrdenCompra.js" />
     <Content Include="Paginas\Scripts\Dueno.js" />
+    <Content Include="Paginas\Scripts\Empleado.js" />
+    <Content Include="Paginas\Scripts\Especie.js" />
     <Content Include="Paginas\Scripts\Login.js" />
+    <Content Include="Paginas\Scripts\Mascota.js" />
     <Content Include="Paginas\Scripts\Menu.js" />
     <Content Include="Paginas\Scripts\MenuLateral.js" />
-    <Content Include="Paginas\Scripts\Pagina1.js" />
-    <Content Include="Paginas\Scripts\Pagina2.js" />
+    <Content Include="Paginas\Scripts\MetodoPago.js" />
+    <Content Include="Paginas\Scripts\OrdenCompra.js" />
+    <Content Include="Paginas\Scripts\Producto.js" />
+    <Content Include="Paginas\Scripts\Proveedor.js" />
+    <Content Include="Paginas\Scripts\Raza.js" />
+    <Content Include="Paginas\Scripts\Sede.js" />
+    <Content Include="Paginas\Scripts\ServicioAdicional.js" />
+    <Content Include="Paginas\Scripts\StockProducto.js" />
+    <Content Include="Paginas\Scripts\TipoCirugia.js" />
+    <Content Include="Paginas\Scripts\TipoCita.js" />
+    <Content Include="Paginas\Scripts\TipoProducto.js" />
+    <Content Include="Paginas\Scripts\TipoServicioAdicional.js" />
+    <Content Include="Paginas\Sede.html" />
+    <Content Include="Paginas\ServicioAdicional.html" />
+    <Content Include="Paginas\StockProducto.html" />
+    <Content Include="Paginas\TipoCirugia.html" />
+    <Content Include="Paginas\TipoCita.html" />
+    <Content Include="Paginas\TipoProducto.html" />
+    <Content Include="Paginas\TipoServicioAdicional.html" />
     <Content Include="Scripts\adminlte.js" />
     <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -634,9 +672,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49765</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50000/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:50000/</IISAppRootUrl>
+          <IISUrl>http://localhost:44302/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

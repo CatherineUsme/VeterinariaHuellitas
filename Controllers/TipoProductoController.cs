@@ -8,7 +8,7 @@ namespace VeterinariaHuellitas.Controllers
     public class TipoProductoController : ApiController
     {
         // Ver: Administrador, Farmaceuta
-        [AuthorizeRoles("Administrador", "Farmaceuta")]
+        //[AuthorizeRoles("Administrador", "Farmaceuta")]
         public List<TIPO_PRODUCTO> Get()
         {
             clsTipoProducto tipoProducto = new clsTipoProducto();
@@ -16,7 +16,7 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         // Ver: Administrador, Farmaceuta
-        [AuthorizeRoles("Administrador", "Farmaceuta")]
+        //[AuthorizeRoles("Administrador", "Farmaceuta")]
         public TIPO_PRODUCTO Get(int id)
         {
             clsTipoProducto tipoProducto = new clsTipoProducto();
@@ -24,7 +24,7 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         // Gestionar: solo Administrador
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Post([FromBody] TIPO_PRODUCTO tipoProducto)
         {
             clsTipoProducto clsTipoProducto = new clsTipoProducto();
@@ -33,7 +33,7 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         // Gestionar: solo Administrador
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Put([FromBody] TIPO_PRODUCTO tipoProducto)
         {
             clsTipoProducto clsTipoProducto = new clsTipoProducto();
@@ -42,7 +42,7 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         // Gestionar: solo Administrador
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string Delete(int id)
         {
             clsTipoProducto clsTipoProducto = new clsTipoProducto();

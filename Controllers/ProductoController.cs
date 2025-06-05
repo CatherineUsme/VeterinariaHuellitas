@@ -9,7 +9,7 @@ namespace VeterinariaHuellitas.Controllers
     {
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public List<PRODUCTO> Get()
         {
             clsProducto servicio = new clsProducto();
@@ -18,7 +18,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Ver: Farmaceuta, Administrador, Veterinario, Recepcionista
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Veterinario", "Recepcionista")]
         public PRODUCTO Get(int id)
         {
             clsProducto servicio = new clsProducto();
@@ -27,7 +27,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Gestionar: Farmaceuta, Administrador
         [HttpPost]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Post([FromBody] PRODUCTO producto)
         {
             clsProducto servicio = new clsProducto();
@@ -37,7 +37,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Gestionar: Farmaceuta, Administrador
         [HttpPut]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Put([FromBody] PRODUCTO producto)
         {
             clsProducto servicio = new clsProducto();
@@ -47,7 +47,7 @@ namespace VeterinariaHuellitas.Controllers
 
         // Eliminar: Farmaceuta, Administrador
         [HttpDelete]
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
         public string Delete(int id)
         {
             clsProducto servicio = new clsProducto();

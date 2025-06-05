@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Gestión de Proveedores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="Scripts/Proveedor.js" defer></script>
+    <style>
+        .custom-nav-tabs {
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+            .custom-nav-tabs .nav-link {
+                color: #0d6efd;
+                font-weight: 500;
+                border: none;
+                background: transparent;
+                transition: background 0.2s, color 0.2s;
+            }
+
+                .custom-nav-tabs .nav-link.active,
+                .custom-nav-tabs .nav-link:focus,
+                .custom-nav-tabs .nav-link:hover {
+                    background: #e3e7ed;
+                    color: #0a58ca;
+                    border-radius: 0.3rem;
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <div class="container">
+                <a class="navbar-brand text-white" href="Home.html">Veterinaria Huellitas</a>
+                <ul class="nav custom-nav-tabs ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Cita.html">Citas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Mascota.html">Mascotas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Dueno.html">Dueños</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Empleado.html">Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Producto.html">Inventario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Proveedor.html">Pagos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Facturacion.html">Facturación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ServicioAdicional.html">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Cama.html">Camas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Sede.html">Sedes</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-5">
+        <h1 class="mb-4">Gestión de Proveedores</h1>
+        <div class="mb-4">
+            <a href="Proveedor.html" class="btn btn-outline-primary me-2">Proveedores</a>
+            <a href="OrdenCompra.html" class="btn btn-outline-success me-2">Orden Compras</a>
+            <a href="DetalleOrdenCompra.html" class="btn btn-outline-info">Detalles Orden Compras</a>
+            <a href="MetodoPago.html" class="btn btn-outline-info">Métodos De Pago</a>
+        </div>
+        <form id="formProveedor" class="card p-4 shadow-sm mb-4">
+            <input type="hidden" id="id_proveedor" name="id_proveedor">
+            <div class="mb-3">
+                <label for="nombre_empresa" class="form-label">Nombre de la Empresa</label>
+                <input type="text" id="nombre_empresa" name="nombre_empresa" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="nit_ruc" class="form-label">NIT/RUC</label>
+                <input type="text" id="nit_ruc" name="nit_ruc" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="contacto_nombre" class="form-label">Nombre de Contacto</label>
+                <input type="text" id="contacto_nombre" name="contacto_nombre" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="contacto_telefono" class="form-label">Teléfono de Contacto</label>
+                <input type="text" id="contacto_telefono" name="contacto_telefono" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="contacto_email" class="form-label">Email de Contacto</label>
+                <input type="email" id="contacto_email" name="contacto_email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="activo" class="form-label">Activo</label>
+                <select id="activo" name="activo" class="form-select" required>
+                    <option value="">Seleccione</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar Proveedor</button>
+            <button type="button" class="btn btn-secondary ms-2 d-none" id="btnCancelar">Cancelar</button>
+        </form>
+        <div id="mensajeProveedor" class="mt-3"></div>
+        <h2 class="mt-5">Listado de Proveedores</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover mt-3" id="tablaProveedores">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>NIT/RUC</th>
+                        <th>Contacto</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenan por JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

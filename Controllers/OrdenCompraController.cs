@@ -22,16 +22,18 @@ namespace VeterinariaHuellitas.Controllers
         }
 
         // Crear: Farmaceuta, Administrador
-        [AuthorizeRoles("Farmaceuta", "Administrador")]
-        public string Post([FromBody]ORDEN_COMPRA ordenCompra)
+        //[AuthorizeRoles("Farmaceuta", "Administrador")]
+        public string Post([FromBody] ORDEN_COMPRA ordenCompra)
         {
             _ordenCompra.ordenCompra = ordenCompra;
             return _ordenCompra.Insertar();
         }
 
         // Modificar: Administrador
-        [AuthorizeRoles("Administrador")]
-        public string Put(int id, [FromBody]ORDEN_COMPRA ordenCompra)
+        //[AuthorizeRoles("Administrador")]
+        [HttpPut]
+        [Route("api/OrdenCompra/{id}")]
+        public string Put(int id, [FromBody] ORDEN_COMPRA ordenCompra)
         {
             ordenCompra.id_orden_compra = id;
             _ordenCompra.ordenCompra = ordenCompra;
@@ -41,7 +43,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver por proveedor: Farmaceuta, Administrador, Recepcionista
         [Route("api/OrdenCompra/Proveedor/{id}")]
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
         public IEnumerable<ORDEN_COMPRA> GetByProveedor(int id)
         {
             return _ordenCompra.ConsultarPorProveedor(id);
@@ -50,7 +52,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver por sede: Farmaceuta, Administrador, Recepcionista
         [Route("api/OrdenCompra/Sede/{id}")]
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
         public IEnumerable<ORDEN_COMPRA> GetBySede(int id)
         {
             return _ordenCompra.ConsultarPorSede(id);
@@ -59,7 +61,7 @@ namespace VeterinariaHuellitas.Controllers
         // Ver por estado: Farmaceuta, Administrador, Recepcionista
         [Route("api/OrdenCompra/Estado/{estado}")]
         [HttpGet]
-        [AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
+        //[AuthorizeRoles("Farmaceuta", "Administrador", "Recepcionista")]
         public IEnumerable<ORDEN_COMPRA> GetByEstado(string estado)
         {
             return _ordenCompra.ConsultarPorEstado(estado);
@@ -68,7 +70,7 @@ namespace VeterinariaHuellitas.Controllers
         // Aprobar: Administrador
         [Route("api/OrdenCompra/{id}/Aprobar")]
         [HttpPut]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string PutAprobar(int id)
         {
             return _ordenCompra.CambiarEstado(id, "Aprobada");
@@ -77,17 +79,16 @@ namespace VeterinariaHuellitas.Controllers
         // Marcar como Recibida: Administrador
         [Route("api/OrdenCompra/{id}/Recibir")]
         [HttpPut]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string PutRecibir(int id)
         {
             return _ordenCompra.CambiarEstado(id, "Recibida");
         }
 
-
         // Cancelar: Administrador
         [Route("api/OrdenCompra/{id}/Cancelar")]
         [HttpPut]
-        [AuthorizeRoles("Administrador")]
+        //[AuthorizeRoles("Administrador")]
         public string PutCancelar(int id)
         {
             return _ordenCompra.CambiarEstado(id, "Cancelada");

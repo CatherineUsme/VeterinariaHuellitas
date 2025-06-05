@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title">GESTIÓN DE DUEÑOS</h3>
                         </div>
-                        <form id="frmIncapacidades">
+                        <form id="frmIncapacidades" autocomplete="off">
                             <div class="card-body">
                                 <div class="card card-gray-dark">
                                     <div class="card-header">
@@ -35,25 +35,25 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtDocumento">DOCUMENTO</label>
-                                                    <input type="text" class="form-control" id="txtDocumento" placeholder="Documento del dueño">
+                                                    <input type="text" class="form-control" id="txtDocumento" placeholder="Documento del dueño" maxlength="20" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtNombre">NOMBRES</label>
-                                                    <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del dueño">
+                                                    <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del dueño" maxlength="50" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtApellidos">APELLIDOS</label>
-                                                    <input type="text" class="form-control" id="txtApellidos" placeholder="Apellidos del dueño">
+                                                    <input type="text" class="form-control" id="txtApellidos" placeholder="Apellidos del dueño" maxlength="50" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtEmail">EMAIL</label>
-                                                    <input type="text" class="form-control" id="txtEmail" placeholder="Email del dueño">
+                                                    <input type="email" class="form-control" id="txtEmail" placeholder="Email del dueño" maxlength="100">
                                                 </div>
                                             </div>
                                         </div>
@@ -61,37 +61,39 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtTelefono">TELEFONO</label>
-                                                    <input type="text" class="form-control" id="txtTelefono" placeholder="Telefono dueño">
+                                                    <input type="text" class="form-control" id="txtTelefono" placeholder="Telefono dueño" maxlength="20">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtDireccion">DIRECCIÓN</label>
-                                                    <input type="text" class="form-control" id="txtDireccion" placeholder="Dirección del dueño">
+                                                    <input type="text" class="form-control" id="txtDireccion" placeholder="Dirección del dueño" maxlength="100">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtId">ID SISTEMA</label>
-                                                    <input type="text" class="form-control" id="txtId" placeholder="Identificacion sistema">
+                                                    <input type="text" class="form-control" id="txtId" placeholder="Identificacion sistema" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="txtFechaCreacion">FECHA CREACION</label>
-                                                    <input type="date" class="form-control" id="txtFechaCreacion" placeholder="Fecha creacion sistema">
+                                                    <input type="date" class="form-control" id="txtFechaCreacion" placeholder="Fecha creacion sistema" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label for="chkActivo">ACTIVO</label>
-                                                    <input type="checkbox" id="chkActivo" class="form-check-input">
+                                                <div class="form-group" style="margin-top:32px;">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="chkActivo" class="form-check-input" checked>
+                                                        <label class="form-check-label" for="chkActivo" style="margin-right: 1.5em;">ACTIVO</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
+                                <div class="card card-gray-dark">
                                     <div class="card-header">
                                         <h3 class="card-title">PROCESO</h3>
                                     </div>
@@ -119,7 +121,7 @@
                                 <div class="card-footer">
                                     <div id="dvMensaje" class=""></div>
                                 </div>
-                                <div class="card">
+                                <div class="card card-gray-dark">
                                     <div class="card-header">
                                         <h3 class="card-title">REGISTROS ACTUALES</h3>
                                     </div>
@@ -135,23 +137,24 @@
                                                         <th>Email</th>
                                                         <th>Telefono</th>
                                                         <th>Direccion</th>
-                                                        <th>Fecha Resgistro</th>
+                                                        <th>Fecha Registro</th>
                                                         <th>Activo</th>
                                                     </tr>
                                                 </thead>
+                                                <tbody>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../Scripts/bootstrap.bundle.min.js"></script>
     <!--Tables-->
     <script src="../Scripts/jquery.dataTables.min.js"></script>
@@ -159,5 +162,24 @@
     <script src="Scripts/Comunes/Comunes.js"></script>
     <script src="Scripts/Comunes/CRUD.js"></script>
     <script src="Scripts/Dueno.js"></script>
+    <script>
+        // Al cargar la página, inicializa la fecha de creación y limpia el formulario
+        $(document).ready(function () {
+            LimpiarFormulario();
+        });
+        // Limpia el formulario y pone la fecha actual en fecha de creación
+        function LimpiarFormulario() {
+            $("#txtId").val("");
+            $("#txtNombre").val("");
+            $("#txtApellidos").val("");
+            $("#txtDocumento").val("");
+            $("#txtEmail").val("");
+            $("#txtTelefono").val("");
+            $("#txtDireccion").val("");
+            $("#txtFechaCreacion").val(new Date().toISOString().split('T')[0]);
+            $("#chkActivo").prop("checked", true);
+            $("#dvMensaje").removeClass().html("");
+        }
+    </script>
 </body>
 </html>

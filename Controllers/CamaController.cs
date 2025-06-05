@@ -10,6 +10,7 @@ using VeterinariaHuellitas.Models;
 namespace VeterinariaHuellitas.Controllers
 {
     [RoutePrefix("api/Cama")]
+    //[AuthorizeRoles("Administrador", "Veterinario", "Recepcionista")]
     public class CamaController : ApiController
     {
         [HttpPost]
