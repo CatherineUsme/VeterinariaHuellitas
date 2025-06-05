@@ -106,9 +106,6 @@
     <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=8.11.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\System.IdentityModel.Tokens.Jwt.8.11.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
@@ -229,6 +226,7 @@
     <Compile Include="Clases\clsDueno.cs" />
     <Compile Include="Clases\clsEmpleado.cs" />
     <Compile Include="Clases\clsEspecieMascota.cs" />
+    <Compile Include="Clases\clsHospitalizacion.cs" />
     <Compile Include="Clases\clsMascota.cs" />
     <Compile Include="Clases\clsRazaMascota.cs" />
     <Compile Include="Clases\clsRol.cs" />
@@ -247,6 +245,7 @@
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\DetalleFacturaController.cs" />
+    <Compile Include="Controllers\HospitalizacionController.cs" />
     <Compile Include="Controllers\MetodoPagoController.cs" />
     <Compile Include="Controllers\CamaController.cs" />
     <Compile Include="Controllers\CargoEmpleadoController.cs" />
