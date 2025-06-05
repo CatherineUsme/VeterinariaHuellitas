@@ -10,7 +10,8 @@ namespace VeterinariaHuellitas
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+            //Habilitar Cors
+            config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
 

@@ -34,14 +34,25 @@ namespace VeterinariaHuellitas.Clases
         {
             try
             {
-                dbVeterinaria.SEDEs.AddOrUpdate(sede);
-                dbVeterinaria.SaveChanges();
-                return "Se actualizo la sede";
+                SEDE sed = Consultar(sede.id_sede);
+                if (sed != null)
+                {
+                    dbVeterinaria.SEDEs.AddOrUpdate(sede);
+                    dbVeterinaria.SaveChanges();
+                    return "Sede actualizada correctamente.";
+
+                }
+                else
+                {
+                    return "Sede no encontrada.";
+                }
+
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "Error al actualizar la sede: " + ex.Message;
             }
+            
         }
         public string Eliminar(int id_sede)
         {
