@@ -5,6 +5,7 @@ using VeterinariaHuellitas.Models;
 namespace VeterinariaHuellitas.Controllers
 {
     [RoutePrefix("api/rol")]
+    [AuthorizeRoles("Administrador")]
     public class RolController : ApiController
     {
         [HttpGet]

@@ -10,10 +10,10 @@ function LlenarTablaDuenos() {
     LlenarTablaXServiciosAuth(URL, "#tblDuenos");
 }
 
-async function EjecutarComando(Metodo, Function) {
+async function EjecutarComando(Metodo, Funcion) {
     let URL = UrlBase + "api/duenos/" + Funcion;
     const dueno = new Dueno($("#txtId").val(), $("#txtNombre").val(), $("#txtApellidos").val(), $("#txtDocumento").val(),
-        $("#txtEmail").val(),$("#txtTelefono").val(), $("#txtDireccion").val(), $("#txtFechaCreacion").val(),)
+        $("#txtEmail").val(), $("#txtTelefono").val(), $("#txtDireccion").val(), $("#txtFechaCreacion").val(), $("#chkActivo").is(":checked"))
     const rpta = await EjecutarComandoServicioAuth(Metodo, URL, dueno);
     LlenarTablaDuenos();
 }

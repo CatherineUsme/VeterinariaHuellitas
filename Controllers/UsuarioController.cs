@@ -5,7 +5,6 @@ using VeterinariaHuellitas.Models;
 
 namespace VeterinariaHuellitas.Controllers
 {
-
     [AuthorizeRoles("Administrador")]
     public class UsuarioController : ApiController
     {

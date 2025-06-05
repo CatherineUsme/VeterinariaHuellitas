@@ -8,16 +8,20 @@ namespace VeterinariaHuellitas.Controllers
     [RoutePrefix("api/citas")]
     public class CitasController : ApiController
     {
+        // Ver: Recepcionista, Veterinario, Administrador
         [HttpGet]
         [Route("")]
+        [AuthorizeRoles("Recepcionista", "Veterinario", "Administrador")]
         public IHttpActionResult GetAll()
         {
             var service = new clsCita();
             return Ok(service.ConsultarTodos());
         }
 
+        // Ver: Recepcionista, Veterinario, Administrador
         [HttpGet]
         [Route("{id:int}")]
+        [AuthorizeRoles("Recepcionista", "Veterinario", "Administrador")]
         public IHttpActionResult GetById(int id)
         {
             var service = new clsCita();
@@ -26,8 +30,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(result);
         }
 
+        // Crear: Recepcionista, Veterinario, Administrador
         [HttpPost]
         [Route("")]
+        [AuthorizeRoles("Recepcionista", "Veterinario", "Administrador")]
         public IHttpActionResult Create([FromBody] CITA cita)
         {
             var service = new clsCita { cita = cita };
@@ -36,8 +42,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Editar: Recepcionista, Veterinario, Administrador
         [HttpPut]
         [Route("")]
+        [AuthorizeRoles("Recepcionista", "Veterinario", "Administrador")]
         public IHttpActionResult Update([FromBody] CITA cita)
         {
             var service = new clsCita { cita = cita };
@@ -46,8 +54,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Editar estado: Recepcionista, Veterinario, Administrador
         [HttpPut]
         [Route("{id:int}/estado")]
+        [AuthorizeRoles("Recepcionista", "Veterinario", "Administrador")]
         public IHttpActionResult CambiarEstado(int id, [FromBody] string nuevoEstado)
         {
             var service = new clsCita();
@@ -71,8 +81,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Eliminar: Recepcionista, Administrador
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizeRoles("Recepcionista", "Administrador")]
         public IHttpActionResult Delete(int id)
         {
             var service = new clsCita();
