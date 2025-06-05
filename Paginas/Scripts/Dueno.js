@@ -1,7 +1,7 @@
-﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
+const baseUrl = "http://veterinariahuellitas.runasp.net/api";
 let duenos = [];
 
-<<<<<<< HEAD
+
 // Al cargar la página, inicializa la fecha y la tabla
 jQuery(function () {
     $("#dvMenu").load("../Paginas/Menu.html");
@@ -76,7 +76,6 @@ function LimpiarFormulario() {
     $("#chkActivo").prop("checked", true);
     $("#dvMensaje").removeClass().html("");
 }
-=======
 function mostrarMensaje(msg, tipo = "success") {
     const div = document.getElementById("mensajeDueno");
     div.innerHTML = `<div class="alert alert-${tipo}" role="alert">${msg}</div>`;
@@ -251,4 +250,3 @@ document.addEventListener("DOMContentLoaded", function () {
     cargarDuenos();
     limpiarFormulario();
 });
->>>>>>> origin/develop-team2

@@ -1,4 +1,4 @@
-﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
+const baseUrl = "http://veterinariahuellitas.runasp.net/api";
 let especies = [];
 
 function mostrarMensaje(msg, tipo = "success") {

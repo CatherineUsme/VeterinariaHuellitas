@@ -1,4 +1,6 @@
-﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
+
+const baseUrl = "http://veterinariahuellitas.runasp.net/api";
+
 let razas = [];
 let especies = [];
 
