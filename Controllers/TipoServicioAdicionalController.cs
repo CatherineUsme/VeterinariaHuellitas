@@ -5,7 +5,7 @@ using VeterinariaHuellitas.Models;
 
 namespace VeterinariaHuellitas.Controllers
 {
-    [AuthorizeRoles("Administrador")]
+    //[AuthorizeRoles("Administrador")]
     public class TipoServicioAdicionalController : ApiController
     {
         public List<TIPO_SERVICIO_ADICIONAL> Get()

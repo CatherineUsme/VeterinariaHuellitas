@@ -10,17 +10,16 @@ namespace VeterinariaHuellitas.Clases
     public class clsMascota
     {
         private VeterinariaEntities dbVeterinaria = new VeterinariaEntities();
-        public MASCOTA mascota{ get; set; }
+        public MASCOTA mascota { get; set; }
 
-        public string Insertar(string cedula)
+        public string Insertar()
         {
             try
             {
-                clsDueno dueno = new clsDueno();
-                DUENO duenoExite = dueno.ConsultarXCedula(cedula);
-                if (duenoExite == null)
+                // Se asume que el id_dueno ya viene en el objeto mascota
+                if (mascota.id_dueno == 0)
                 {
-                    return "El dueño no esta resgistrado, se debe registrar primero";
+                    return "Debe seleccionar un dueño válido para la mascota.";
                 }
                 dbVeterinaria.MASCOTAs.Add(mascota);
                 dbVeterinaria.SaveChanges();
@@ -56,7 +55,6 @@ namespace VeterinariaHuellitas.Clases
 
         public MASCOTA ConsultarXId(int id_mascota)
         {
-
             return dbVeterinaria.MASCOTAs.FirstOrDefault(e => e.id_mascota == id_mascota);
         }
 
@@ -78,7 +76,6 @@ namespace VeterinariaHuellitas.Clases
         {
             try
             {
-
                 MASCOTA masc = ConsultarXId(id_mascota);
                 if (masc == null)
                 {
@@ -120,6 +117,5 @@ namespace VeterinariaHuellitas.Clases
                 return "Hubo un error al modificar el estado de la mascota: " + ex.Message;
             }
         }
-
     }
 }

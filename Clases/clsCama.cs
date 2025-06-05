@@ -32,6 +32,8 @@ namespace VeterinariaHuellitas.Clases
             return dbVeterinaria.CAMAs.OrderBy(s => s.id_cama).ToList();
         }
 
+
+
         public string Actualizar()
         {
             try
