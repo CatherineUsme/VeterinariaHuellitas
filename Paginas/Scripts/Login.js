@@ -16,7 +16,7 @@
         if (response.ok) {
             const data = await response.json();
             // Guarda el token en cookie o localStorage
-            document.cookie = "token=" + data.token + ";path=/";
+            document.cookie = "auth_token=" + data.token + ";path=/";
             $("#dvMensaje").removeClass("alert alert-danger").addClass("alert alert-success");
             $("#dvMensaje").html("Login exitoso. Redirigiendo...");
             // Redirige inmediatamente a la página principal
