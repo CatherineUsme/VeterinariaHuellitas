@@ -1,5 +1,5 @@
 ﻿async function Ingresar() {
-    let BaseURL = "http://localhost:50000";
+    let BaseURL = "http://localhost:44302";
     let URL = BaseURL + "/api/auth/login";
     const login = {
         Username: $("#txtUsuario").val(),
