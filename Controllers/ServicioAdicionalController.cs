@@ -7,16 +7,20 @@ namespace VeterinariaHuellitas.Controllers
     [RoutePrefix("api/servicio-adicional")]
     public class ServicioAdicionalController : ApiController
     {
+        // Ver: Administrador, Recepcionista, Veterinario
         [HttpGet]
         [Route("")]
+        [AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
         public IHttpActionResult GetAll()
         {
             var service = new clsServicioAdicional();
             return Ok(service.ConsultarTodos());
         }
 
+        // Ver: Administrador, Recepcionista, Veterinario
         [HttpGet]
         [Route("{id:int}")]
+        [AuthorizeRoles("Administrador", "Recepcionista", "Veterinario")]
         public IHttpActionResult GetById(int id)
         {
             var service = new clsServicioAdicional();
@@ -25,8 +29,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(result);
         }
 
+        // Crear: Administrador, Recepcionista
         [HttpPost]
         [Route("")]
+        [AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Create([FromBody] SERVICIO_ADICIONAL_PRESTADO servicio)
         {
             var service = new clsServicioAdicional { servicio = servicio };
@@ -35,8 +41,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Editar: Administrador, Recepcionista
         [HttpPut]
         [Route("")]
+        [AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Update([FromBody] SERVICIO_ADICIONAL_PRESTADO servicio)
         {
             var service = new clsServicioAdicional { servicio = servicio };
@@ -45,8 +53,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Eliminar: Administrador, Recepcionista
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizeRoles("Administrador", "Recepcionista")]
         public IHttpActionResult Delete(int id)
         {
             var service = new clsServicioAdicional();

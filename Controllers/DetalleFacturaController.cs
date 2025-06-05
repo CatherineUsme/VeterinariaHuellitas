@@ -7,16 +7,20 @@ namespace VeterinariaHuellitas.Controllers
     [RoutePrefix("api/detalle-factura")]
     public class DetalleFacturaController : ApiController
     {
+        // Ver: Recepcionista, Administrador, Veterinario, Farmaceuta
         [HttpGet]
         [Route("factura/{idFactura:int}")]
+        [AuthorizeRoles("Recepcionista", "Administrador", "Veterinario", "Farmaceuta")]
         public IHttpActionResult GetByFactura(int idFactura)
         {
             var service = new clsDetalleFactura();
             return Ok(service.ConsultarPorFactura(idFactura));
         }
 
+        // Ver: Recepcionista, Administrador, Veterinario, Farmaceuta
         [HttpGet]
         [Route("{id:int}")]
+        [AuthorizeRoles("Recepcionista", "Administrador", "Veterinario", "Farmaceuta")]
         public IHttpActionResult GetById(int id)
         {
             var service = new clsDetalleFactura();
@@ -25,8 +29,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(result);
         }
 
+        // Crear: Recepcionista, Administrador
         [HttpPost]
         [Route("")]
+        [AuthorizeRoles("Recepcionista", "Administrador")]
         public IHttpActionResult Create([FromBody] DETALLE_FACTURA detalleFactura)
         {
             var service = new clsDetalleFactura { detalleFactura = detalleFactura };
@@ -35,8 +41,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Editar: Recepcionista, Administrador
         [HttpPut]
         [Route("")]
+        [AuthorizeRoles("Recepcionista", "Administrador")]
         public IHttpActionResult Update([FromBody] DETALLE_FACTURA detalleFactura)
         {
             var service = new clsDetalleFactura { detalleFactura = detalleFactura };
@@ -45,8 +53,10 @@ namespace VeterinariaHuellitas.Controllers
             return Ok(msg);
         }
 
+        // Eliminar (anular): Recepcionista (con permisos específicos), Administrador
         [HttpDelete]
         [Route("{id:int}")]
+        [AuthorizeRoles("Recepcionista", "Administrador")]
         public IHttpActionResult Delete(int id)
         {
             var service = new clsDetalleFactura();
