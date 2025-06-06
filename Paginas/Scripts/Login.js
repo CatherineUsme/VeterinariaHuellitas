@@ -1,5 +1,9 @@
 ﻿async function Ingresar() {
+<<<<<<< HEAD
     let BaseURL = "http://veterinariahuellitas.runasp.net/";
+=======
+    let BaseURL = "http://veterinariahuellitas.runasp.net";
+>>>>>>> 5087329 (Commit final)
     let URL = BaseURL + "/api/auth/login";
     const login = {
         Username: $("#txtUsuario").val(),
