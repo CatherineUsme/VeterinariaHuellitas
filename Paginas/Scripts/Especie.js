@@ -1,16 +1,15 @@
-<<<<<<< HEAD
+// URL base de la API
 const baseUrl = "http://veterinariahuellitas.runasp.net/api";
-=======
-﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
->>>>>>> 5087329 (Commit final)
 let especies = [];
 
+// Utilidad para mostrar mensajes al usuario
 function mostrarMensaje(msg, tipo = "success") {
     const div = document.getElementById("mensajeEspecie");
     div.innerHTML = `<div class="alert alert-${tipo}" role="alert">${msg}</div>`;
     setTimeout(() => div.innerHTML = "", 3000);
 }
 
+// Cargar todas las especies y mostrarlas en la tabla
 function cargarEspecies() {
     fetch(`${baseUrl}/especiesmascota/ConsultarTodos`)
         .then(r => r.json())
@@ -20,6 +19,7 @@ function cargarEspecies() {
         });
 }
 
+// Renderizar la tabla de especies
 function mostrarEspecies() {
     const tbody = document.querySelector("#tablaEspecies tbody");
     tbody.innerHTML = "";
@@ -37,6 +37,7 @@ function mostrarEspecies() {
     });
 }
 
+// Limpiar el formulario y restablecer controles
 function limpiarFormulario() {
     document.getElementById("formEspecie").reset();
     document.getElementById("id_especie_form").value = "";
@@ -44,6 +45,7 @@ function limpiarFormulario() {
     document.getElementById("btnCancelarEspecie").classList.add("d-none");
 }
 
+// Cargar datos de una especie en el formulario para edición
 function editarEspecie(id) {
     const especie = especies.find(e => e.id_especie === id);
     if (!especie) return;
@@ -53,6 +55,7 @@ function editarEspecie(id) {
     document.getElementById("btnCancelarEspecie").classList.remove("d-none");
 }
 
+// Eliminar una especie
 function eliminarEspecie(id) {
     if (!confirm("¿Está seguro de eliminar esta especie?")) return;
     const especie = especies.find(e => e.id_especie === id);
@@ -66,6 +69,7 @@ function eliminarEspecie(id) {
         .catch(() => mostrarMensaje("Error al eliminar la especie.", "danger"));
 }
 
+// Guardar o actualizar una especie (evento submit)
 document.getElementById("formEspecie").addEventListener("submit", function (e) {
     e.preventDefault();
     const idEspecie = document.getElementById("id_especie_form").value;
@@ -99,13 +103,16 @@ document.getElementById("formEspecie").addEventListener("submit", function (e) {
         .catch(() => mostrarMensaje("Error al guardar la especie.", "danger"));
 });
 
+// Cancelar la edición
 document.getElementById("btnCancelarEspecie").addEventListener("click", function () {
     limpiarFormulario();
 });
 
+// Exponer funciones globalmente para los botones generados dinámicamente
 window.editarEspecie = editarEspecie;
 window.eliminarEspecie = eliminarEspecie;
 
+// Inicialización al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
     cargarEspecies();
     limpiarFormulario();

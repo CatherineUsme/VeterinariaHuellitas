@@ -1,7 +1,9 @@
-﻿$(document).ready(function () {
+﻿// Inicialización al cargar el documento
+$(document).ready(function () {
     cargarCombos();
     cargarServicios();
 
+    // Guardar o actualizar servicio
     $('#formServicioAdicional').on('submit', function (e) {
         e.preventDefault();
         let servicio = obtenerDatosFormulario();
@@ -13,15 +15,18 @@
         }
     });
 
+    // Cancelar edición
     $('#btnCancelarServicio').on('click', function () {
         limpiarFormulario();
     });
 
+    // Editar servicio
     $('#tablaServicioAdicional tbody').on('click', '.btn-editar', function () {
         let id = $(this).data('id');
         consultarServicio(id);
     });
 
+    // Eliminar servicio
     $('#tablaServicioAdicional tbody').on('click', '.btn-eliminar', function () {
         let id = $(this).data('id');
         if (confirm('¿Está seguro de eliminar este servicio?')) {
@@ -30,13 +35,13 @@
     });
 });
 
+// Cargar combos de selección
 function cargarCombos() {
-    // Mascotas
-    $.get('/api/mascota/ConsultarTodos', function (data) {
+    // Mascotas (corregido a plural)
+    $.get('/api/mascotas/ConsultarTodos', function (data) {
         let sel = $('#id_mascota');
         sel.empty().append('<option value="">Seleccione una mascota</option>');
         data.forEach(function (m) {
-            // Ajusta 'nombre' si tu modelo usa otro campo
             sel.append(`<option value="${m.id_mascota}">${m.nombre}</option>`);
         });
     });
@@ -46,7 +51,6 @@ function cargarCombos() {
         let sel = $('#id_tipo_servicio_adicional');
         sel.empty().append('<option value="">Seleccione un tipo</option>');
         data.forEach(function (t) {
-            // Ajusta 'nombre_servicio' si tu modelo usa otro campo
             sel.append(`<option value="${t.id_tipo_servicio_adicional}">${t.nombre_servicio}</option>`);
         });
     });
@@ -56,7 +60,6 @@ function cargarCombos() {
         let sel = $('#id_empleado_realiza');
         sel.empty().append('<option value="">Seleccione un empleado</option>');
         data.forEach(function (e) {
-            // Ajusta 'nombre' y 'apellido' si tu modelo usa otros campos
             sel.append(`<option value="${e.id_empleado}">${e.nombre} ${e.apellido}</option>`);
         });
     });
@@ -66,12 +69,12 @@ function cargarCombos() {
         let sel = $('#id_sede');
         sel.empty().append('<option value="">Seleccione una sede</option>');
         data.forEach(function (s) {
-            // Ajusta 'nombre_sede' si tu modelo usa otro campo
             sel.append(`<option value="${s.id_sede}">${s.nombre_sede}</option>`);
         });
     });
 }
 
+// Obtener datos del formulario
 function obtenerDatosFormulario() {
     return {
         id_servicio_prestado: $('#id_servicio_prestado').val(),
@@ -85,6 +88,7 @@ function obtenerDatosFormulario() {
     };
 }
 
+// Limpiar el formulario
 function limpiarFormulario() {
     $('#formServicioAdicional')[0].reset();
     $('#id_servicio_prestado').val('');
@@ -92,6 +96,7 @@ function limpiarFormulario() {
     $('#btnCancelarServicio').addClass('d-none');
 }
 
+// Cargar servicios y llenar la tabla
 function cargarServicios() {
     $.ajax({
         url: '/api/servicio-adicional',
@@ -105,6 +110,7 @@ function cargarServicios() {
     });
 }
 
+// Llenar la tabla de servicios
 function llenarTablaServicios(servicios) {
     let tbody = $('#tablaServicioAdicional tbody');
     tbody.empty();
@@ -132,6 +138,7 @@ function llenarTablaServicios(servicios) {
     }
 }
 
+// Insertar un nuevo servicio
 function insertarServicio(servicio) {
     $.ajax({
         url: '/api/servicio-adicional',
@@ -149,6 +156,7 @@ function insertarServicio(servicio) {
     });
 }
 
+// Consultar un servicio para edición
 function consultarServicio(id) {
     $.ajax({
         url: '/api/servicio-adicional/' + id,
@@ -173,6 +181,7 @@ function consultarServicio(id) {
     });
 }
 
+// Actualizar un servicio existente
 function actualizarServicio(servicio) {
     $.ajax({
         url: '/api/servicio-adicional',
@@ -190,6 +199,7 @@ function actualizarServicio(servicio) {
     });
 }
 
+// Eliminar un servicio
 function eliminarServicio(id) {
     $.ajax({
         url: '/api/servicio-adicional/' + id,
@@ -204,6 +214,7 @@ function eliminarServicio(id) {
     });
 }
 
+// Mostrar mensajes de éxito o error
 function mostrarMensaje(msg, esExito) {
     let div = $('#mensajeServicioAdicional');
     div.html(`<div class="alert ${esExito ? 'alert-success' : 'alert-danger'}">${msg}</div>`);

@@ -1,17 +1,16 @@
-﻿async function Ingresar() {
-<<<<<<< HEAD
-    let BaseURL = "http://veterinariahuellitas.runasp.net/";
-=======
-    let BaseURL = "http://veterinariahuellitas.runasp.net";
->>>>>>> 5087329 (Commit final)
-    let URL = BaseURL + "/api/auth/login";
+﻿// URL base de la API
+const BaseURL = "http://veterinariahuellitas.runasp.net";
+const LoginAPI = BaseURL + "/api/auth/login";
+
+// Función principal para el login
+async function Ingresar() {
     const login = {
         Username: $("#txtUsuario").val(),
         Password: $("#txtClave").val()
     };
 
     try {
-        const response = await fetch(URL, {
+        const response = await fetch(LoginAPI, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(login)
@@ -23,7 +22,6 @@
             document.cookie = "auth_token=" + data.token + ";path=/";
             $("#dvMensaje").removeClass("alert alert-danger").addClass("alert alert-success");
             $("#dvMensaje").html("Login exitoso. Redirigiendo...");
-            // Redirige inmediatamente a la página principal
             window.location.href = "Home.html";
         } else if (response.status === 401) {
             $("#dvMensaje").removeClass("alert alert-success").addClass("alert alert-danger");
@@ -38,7 +36,7 @@
     }
 }
 
-// Clase auxiliar (opcional, no usada en el envío actual)
+// Clase auxiliar (no utilizada actualmente, pero disponible para futuras mejoras)
 class Login {
     constructor(Usuario, Clave) {
         this.Usuario = Usuario;

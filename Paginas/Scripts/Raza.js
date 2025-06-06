@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-
-const baseUrl = "http://veterinariahuellitas.runasp.net/api";
-
-=======
 ﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
->>>>>>> 5087329 (Commit final)
+
 let razas = [];
 let especies = [];
 

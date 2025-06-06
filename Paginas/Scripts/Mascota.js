@@ -1,20 +1,19 @@
-<<<<<<< HEAD
+// URL base de la API
 const baseUrl = "http://veterinariahuellitas.runasp.net/api";
-=======
-﻿const baseUrl = "http://veterinariahuellitas.runasp.net/api";
->>>>>>> 5087329 (Commit final)
 
 let mascotas = [];
 let especies = [];
 let razas = [];
 let duenos = [];
 
+// Utilidad para mostrar mensajes al usuario
 function mostrarMensaje(msg, tipo = "success") {
     const div = document.getElementById("mensajeMascota");
     div.innerHTML = `<div class="alert alert-${tipo}" role="alert">${msg}</div>`;
     setTimeout(() => div.innerHTML = "", 3000);
 }
 
+// Cargar especies y llenar el select
 function cargarEspecies() {
     return fetch(`${baseUrl}/especiesmascota/ConsultarTodos`)
         .then(r => r.json())
@@ -31,6 +30,7 @@ function cargarEspecies() {
         });
 }
 
+// Cargar razas y filtrar según especie seleccionada
 function cargarRazas() {
     return fetch(`${baseUrl}/razasmascota/ConsultarTodos`)
         .then(r => r.json())
@@ -40,6 +40,7 @@ function cargarRazas() {
         });
 }
 
+// Filtrar razas por especie seleccionada
 function filtrarRazas() {
     const idEspecie = parseInt(document.getElementById("id_especie").value);
     const sel = document.getElementById("id_raza");
@@ -52,6 +53,7 @@ function filtrarRazas() {
     });
 }
 
+// Cargar dueños y llenar el select
 function cargarDuenos() {
     return fetch(`${baseUrl}/duenos/ConsultarTodos`)
         .then(r => r.json())
@@ -68,6 +70,7 @@ function cargarDuenos() {
         });
 }
 
+// Cargar mascotas y mostrarlas en la tabla
 function cargarMascotas() {
     fetch(`${baseUrl}/mascotas/ConsultarTodos`)
         .then(r => r.json())
@@ -77,6 +80,7 @@ function cargarMascotas() {
         });
 }
 
+// tabla de mascotas
 function mostrarMascotas() {
     const tbody = document.querySelector("#tablaMascotas tbody");
     tbody.innerHTML = "";
@@ -106,6 +110,7 @@ function mostrarMascotas() {
     });
 }
 
+// Limpiar el formulario y restablecer controles
 function limpiarFormulario() {
     document.getElementById("formMascota").reset();
     document.getElementById("id_mascota").value = "";
@@ -114,6 +119,7 @@ function limpiarFormulario() {
     filtrarRazas();
 }
 
+// Cargar datos de una mascota en el formulario para edición
 function editarMascota(id) {
     const mascota = mascotas.find(m => m.id_mascota === id);
     if (!mascota) return;
@@ -137,6 +143,7 @@ function editarMascota(id) {
     document.getElementById("btnCancelar").classList.remove("d-none");
 }
 
+// Eliminar una mascota
 function eliminarMascota(id) {
     if (!confirm("¿Está seguro de eliminar esta mascota?")) return;
     fetch(`${baseUrl}/mascotas/EliminarXId?id_mascota=${id}`, { method: "DELETE" })
@@ -147,6 +154,7 @@ function eliminarMascota(id) {
         })
         .catch(() => mostrarMensaje("Error al eliminar la mascota.", "danger"));
 }
+
 
 document.getElementById("id_especie").addEventListener("change", filtrarRazas);
 
@@ -198,7 +206,7 @@ document.getElementById("btnCancelar").addEventListener("click", function () {
 window.editarMascota = editarMascota;
 window.eliminarMascota = eliminarMascota;
 
-// Inicialización
+// Inicialización al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
     Promise.all([cargarEspecies(), cargarRazas(), cargarDuenos()]).then(cargarMascotas);
     limpiarFormulario();
